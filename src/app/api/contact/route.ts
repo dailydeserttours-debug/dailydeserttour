@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 
 interface ContactPayload {
-  name?: string;
+  firstName?: string;
+  lastName?: string;
   email?: string;
-  phone?: string;
-  country?: string;
-  reason?: string;
-  subject?: string;
+  tourInterest?: string;
+  groupSize?: string;
+  travelDates?: string;
   message?: string;
   company?: string; // honeypot — real visitors never see or fill this field
 }
@@ -25,9 +25,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  if (!body.name?.trim() || !body.email?.trim() || !body.message?.trim()) {
+  if (!body.firstName?.trim() || !body.lastName?.trim() || !body.email?.trim() || !body.message?.trim()) {
     return NextResponse.json(
-      { ok: false, error: "Name, email, and message are required." },
+      { ok: false, error: "First name, last name, email, and message are required." },
       { status: 400 },
     );
   }

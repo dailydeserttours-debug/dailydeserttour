@@ -12,25 +12,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about": 0.5,
     "/contact": 0.5,
   };
-  const staticRoutes = ["", "/about", "/contact", "/trip", "/destinations", "/blog", "/privacy", "/terms"].map(
-    (path) => ({
-      url: `${siteConfig.url}${path}`,
-      lastModified: new Date(),
-      changeFrequency: (path === "" || path === "/trip" ? "weekly" : "monthly") as "weekly" | "monthly",
-      priority: priorities[path] ?? 0.3,
-    }),
-  );
+  // /privacy and /terms are intentionally excluded — they're noindexed placeholder
+  // pages (see their metadata) and don't belong in the sitemap until real copy lands.
+  const staticRoutes = ["", "/about", "/contact", "/trip", "/destinations", "/blog"].map((path) => ({
+    url: `${siteConfig.url}${path}`,
+    changeFrequency: (path === "" || path === "/trip" ? "weekly" : "monthly") as "weekly" | "monthly",
+    priority: priorities[path] ?? 0.3,
+  }));
 
+  // No per-tour/per-destination "last updated" timestamp exists in the data — omitting
+  // lastModified (rather than stamping every URL with the build time) keeps the signal honest.
   const tourRoutes = tours.map((tour) => ({
     url: `${siteConfig.url}/trip/${tour.slug}`,
-    lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
 
   const destinationRoutes = destinations.map((destination) => ({
     url: `${siteConfig.url}/destinations/${destination.slug}`,
-    lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));

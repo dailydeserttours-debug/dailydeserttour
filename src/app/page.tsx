@@ -170,15 +170,12 @@ export default function HomePage() {
               "Repeat travelers often come back for a second region of Morocco after their first Sahara trip with us.",
             ].map((quote, i) => (
               <figure key={i} className="rounded-2xl border border-white/10 bg-white/5 p-6">
-                <div className="flex gap-0.5 text-terracotta-400">
-                  {Array.from({ length: 5 }).map((_, s) => (
-                    <Star key={s} className="h-4 w-4" fill="currentColor" strokeWidth={0} />
-                  ))}
-                </div>
-                <blockquote className="mt-4 text-sm leading-relaxed text-sand-100/90">
+                <blockquote className="text-sm leading-relaxed text-sand-100/90">
                   &ldquo;{quote}&rdquo;
                 </blockquote>
-                <figcaption className="mt-4 text-xs text-sand-300">Traveler feedback, summarized</figcaption>
+                <figcaption className="mt-4 text-xs text-sand-300">
+                  Illustrative feedback, written to reflect common guest comments — not a verified review
+                </figcaption>
               </figure>
             ))}
           </div>
@@ -197,19 +194,17 @@ export default function HomePage() {
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {reviews.map((review) => (
               <div key={review.trip} className="border-t border-sand-300 pt-5">
-                <div className="flex gap-0.5 text-terracotta-500">
-                  {Array.from({ length: 5 }).map((_, s) => (
-                    <Star key={s} className="h-3.5 w-3.5" fill="currentColor" strokeWidth={0} />
-                  ))}
-                </div>
-                <blockquote className="mt-3 text-sm leading-relaxed text-night-700">
+                <blockquote className="text-sm leading-relaxed text-night-700">
                   &ldquo;{review.quote}&rdquo;
                 </blockquote>
                 <p className="mt-3 text-xs text-night-500">{review.trip}</p>
               </div>
             ))}
           </div>
-          <p className="mt-10 text-xs text-night-400">Guest feedback, summarized from post-trip conversations.</p>
+          <p className="mt-10 text-xs text-night-400">
+            Illustrative feedback, written to reflect common guest comments — not pulled from a live review
+            platform.
+          </p>
         </div>
       </section>
 
@@ -267,13 +262,16 @@ export default function HomePage() {
       <section className="bg-terracotta-600 py-16">
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 px-4 text-center sm:px-6 lg:px-8">
           <h2 className="font-display text-3xl font-semibold text-white sm:text-4xl">
-            Contact us today and start your unforgettable journey through Morocco!
+            Ready when you are — tell us where you want to go.
           </h2>
+          <p className="max-w-xl text-sm text-white/90">
+            No pressure, no fixed packages — just message us your dates and ideas and we&rsquo;ll build the trip from there.
+          </p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-terracotta-700 shadow-lg transition-transform hover:scale-105"
           >
-            Get in touch
+            Start planning my trip
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

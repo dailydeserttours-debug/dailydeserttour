@@ -50,7 +50,7 @@ export function HeroSlideshow({ chapters }: { chapters: Chapter[] }) {
   const active = chapters[index];
 
   return (
-    <section className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-night-900" style={{ minHeight: "720px" }}>
+    <section className="relative isolate flex min-h-[70svh] items-center overflow-hidden bg-night-900" style={{ minHeight: "560px" }}>
       {/* Photography */}
       {chapters.map((chapter, i) => (
         <div
@@ -74,23 +74,23 @@ export function HeroSlideshow({ chapters }: { chapters: Chapter[] }) {
         </div>
       ))}
 
-      {/* Legibility gradients — anchored low, so the photograph stays the subject */}
-      <div className="absolute inset-0 bg-gradient-to-t from-night-900/92 via-night-900/15 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-r from-night-900/50 via-transparent to-transparent" />
+      {/* Legibility overlay — even darkening so centered text stays readable over any photo */}
+      <div className="absolute inset-0 bg-night-900/45" />
+      <div className="absolute inset-0 bg-gradient-to-t from-night-900/85 via-night-900/25 to-night-900/20" />
 
       {/* Content */}
-      <div className="relative mx-auto w-full max-w-7xl px-4 pb-14 pt-32 sm:px-6 lg:px-8 lg:pb-16">
+      <div className="relative mx-auto w-full max-w-7xl px-4 py-14 text-center sm:px-6 lg:px-8">
         <div key={active.id} className={reducedMotion ? "" : "animate-[fadein_700ms_ease-out]"}>
           <p className="text-xs font-medium uppercase tracking-[0.25em] text-sand-200/75">{active.location}</p>
 
-          <div className="mt-6 max-w-xl">
+          <div className="mx-auto mt-6 max-w-2xl">
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-terracotta-400">{active.kicker}</p>
             <h1 className="mt-3 font-display text-4xl font-medium leading-[1.1] text-white sm:text-5xl lg:text-[3.4rem]">
               {active.headline[0]}
               <br />
               <span className="italic text-sand-100">{active.headline[1]}</span>
             </h1>
-            <p className="mt-5 max-w-md text-base leading-relaxed text-sand-100/85">{active.body}</p>
+            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-sand-100/85">{active.body}</p>
 
             <Link
               href={active.cta.href}
@@ -103,7 +103,7 @@ export function HeroSlideshow({ chapters }: { chapters: Chapter[] }) {
         </div>
 
         {/* Chapter navigator */}
-        <div className="mt-16 flex items-center gap-4">
+        <div className="mx-auto mt-10 flex max-w-2xl items-center gap-4">
           <span className="text-xs tabular-nums tracking-widest text-sand-300/70">
             {String(index + 1).padStart(2, "0")} / {String(chapters.length).padStart(2, "0")}
           </span>

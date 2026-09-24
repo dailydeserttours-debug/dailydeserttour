@@ -79,7 +79,7 @@ export default function AboutPage() {
 
       <Breadcrumbs items={[{ name: "Home", url: "/" }, { name: "About", url: "/about" }]} />
 
-      <section className="mx-auto grid max-w-4xl grid-cols-2 gap-6 px-4 py-10 text-center sm:px-6 lg:px-8">
+      <section className="mx-auto flex max-w-4xl justify-center gap-6 px-4 py-10 text-center sm:px-6 lg:px-8">
         {stats.map((stat) => (
           <div key={stat.label}>
             <p className="font-display text-3xl font-semibold text-terracotta-600 sm:text-4xl">{stat.value}</p>

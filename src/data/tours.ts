@@ -19,13 +19,22 @@ export interface Tour {
   featured?: boolean;
 }
 
-const genericIncluded = [
-  "Private transport (4x4 or minivan) with an English-speaking driver-guide",
-  "Accommodation as specified in the itinerary (hotels, riads, kasbahs)",
-  "One or more nights in a Berber desert camp with dinner and breakfast",
-  "Camel trekking in the Erg Chebbi or Erg Chigaga dunes",
-  "All activities and guided visits mentioned in the itinerary",
-];
+/** Card/list-view fields only — use this for anything crossing a server→client boundary
+ * (e.g. props into a "use client" component) so the full itinerary/highlights/included/
+ * excluded text isn't serialized into the client bundle for pages that never render it. */
+export type TourSummary = Pick<Tour, "slug" | "title" | "departureCity" | "days" | "nights" | "summary">;
+
+// Most itineraries visit Erg Chebbi (Merzouga); a few visit Erg Chigaga (Zagora/M'Hamid) instead —
+// pass the real dune field for the specific route rather than hedging with "or".
+function standardIncluded(duneField: "Erg Chebbi" | "Erg Chigaga" = "Erg Chebbi") {
+  return [
+    "Private transport (4x4 or minivan) with an English-speaking driver-guide",
+    "Accommodation as specified in the itinerary (hotels, riads, kasbahs)",
+    "One or more nights in a Berber desert camp with dinner and breakfast",
+    `Camel trekking in the ${duneField} dunes`,
+    "All activities and guided visits mentioned in the itinerary",
+  ];
+}
 
 const genericExcluded = [
   "International flights",
@@ -133,7 +142,7 @@ export const tours: Tour[] = [
           "Westward travel through Kalaat M'Gouna's Valley of Roses, famed for its fragrant rose products and springtime festival. Skoura's palm groves lead to Ouarzazate for optional Atlas Studios visits, then the grand Kasbah of Ait Ben Haddou, with its earthen clay architecture and UNESCO recognition. The journey crosses the High Atlas Mountains via the Tizi-n-Tichka pass before arrival in Marrakech and traditional riad accommodation.",
       },
     ],
-    included: genericIncluded,
+    included: standardIncluded(),
     excluded: genericExcluded,
     meetingPoint: "Errachidia",
   },
@@ -175,7 +184,7 @@ export const tours: Tour[] = [
           "Rise early for a breathtaking sunrise over the dunes. After breakfast in camp, try sandboarding or simply enjoy the peace of the desert. Mount your camel for the ride back to the edge of the dunes, where your driver transfers you back to Errachidia in time for your flight.",
       },
     ],
-    included: genericIncluded,
+    included: standardIncluded(),
     excluded: genericExcluded,
     meetingPoint: "Errachidia",
   },
@@ -187,7 +196,7 @@ export const tours: Tour[] = [
     nights: 4,
     featured: true,
     summary:
-      "Breathtaking desert landscapes, ancient kasbahs, and dramatic mountain passes across southern Morocco: UNESCO treasures, Berber hospitality, and magical nights under the stars in the Sahara, concluding in Marrakech.",
+      "Southern Morocco's kasbah trail in five days: Aït Benhaddou, the Rose Valley, Todra Gorge, and a night in the Erg Chebbi dunes before the Tizi n'Tichka pass into Marrakech.",
     highlights: [
       "UNESCO-listed Aït Benhaddou and the preserved Kasbah Amridil",
       "The fragrant Rose Valley and towering cliffs of Dades Gorge",
@@ -229,7 +238,7 @@ export const tours: Tour[] = [
           "Explore the famed film sets at Atlas Studios before returning to Aït Benhaddou for a deeper look, then cross to the ornate Telouet Kasbah, once the residence of the powerful Glaoui family. A scenic drive over Tizi n'Tichka Pass leads into Marrakech, where your desert adventure ends at your riad or hotel.",
       },
     ],
-    included: genericIncluded,
+    included: standardIncluded(),
     excluded: genericExcluded,
     meetingPoint: "Ouarzazate",
   },
@@ -278,7 +287,7 @@ export const tours: Tour[] = [
           "Wake early to catch the sunrise over the dunes, then journey back toward Ouarzazate through Rissani's traditional markets and the remote desert towns of Alnif and N'Kob. The route follows the vast palm groves of the Draa Valley, Morocco's longest river valley, exploring ancient kasbahs and date farms, with lunch in Agdez before returning by late afternoon.",
       },
     ],
-    included: genericIncluded,
+    included: standardIncluded(),
     excluded: genericExcluded,
     meetingPoint: "Ouarzazate",
   },
@@ -314,7 +323,7 @@ export const tours: Tour[] = [
       { day: 9, title: "Ait Benhaddou – Taliouine – Taroudant", description: "Visit the kasbah known for its role in films like Gladiator and Game of Thrones, continue through Taznakht, renowned for Berber carpets, and stop in Taliouine, Morocco's saffron capital, before arriving in Taroudant, often called \"Little Marrakech.\"" },
       { day: 10, title: "Taroudant – Agadir (Tour End)", description: "Explore Taroudant's ancient walls, traditional souks, and laid-back atmosphere, then drive back to Agadir through the scenic Souss Valley, arriving in the afternoon to mark the end of your tour." },
     ],
-    included: genericIncluded,
+    included: standardIncluded(),
     excluded: genericExcluded,
     meetingPoint: "Agadir",
   },
@@ -346,7 +355,7 @@ export const tours: Tour[] = [
       { day: 5, title: "Merzouga – Rissani – Draa Valley – Ouarzazate", description: "Rise early for a magical Sahara sunrise, then explore Rissani's authentic market before continuing through the Anti-Atlas to Agdz, visiting the ancient Tamnougalt Kasbah and the endless date palms of the Draa Valley, concluding in Ouarzazate." },
       { day: 6, title: "Ouarzazate – Taznakht – Taliouine – Taroudant – Agadir", description: "Stop in Taznakht for handcrafted Berber rugs and Taliouine, the saffron capital of Morocco, then continue to Taroudant, a walled Berber city often called \"Little Marrakech,\" before arriving back in Agadir by late afternoon." },
     ],
-    included: genericIncluded,
+    included: standardIncluded(),
     excluded: genericExcluded,
     meetingPoint: "Agadir",
   },
@@ -371,7 +380,7 @@ export const tours: Tour[] = [
       { day: 2, title: "Todra Gorges – Erfoud – Merzouga (Sahara Desert)", description: "Explore the Todra Canyon, then travel through Tinjdad and the Tafilalt Oasis, stopping at Erfoud's fossil and marble workshops and traditional underground water channels, with a Berber lunch en route. Late-afternoon arrival at Erg Chebbi includes mint tea, camel trekking across the sands, and an evening of Berber music, dinner, and stargazing by the fire." },
       { day: 3, title: "Merzouga – Tazzarine – N'kob – Draa Valley – Agdz – Ouarzazate", description: "Sunrise over the dunes, then travel through rocky plateaus to Tazzarine, featured in the film Babel. Lunch in N'Kob, surrounded by ancient kasbahs, precedes the scenic route along former caravan trails through the Draa Valley's palm groves and mud-brick villages back to Ouarzazate." },
     ],
-    included: genericIncluded,
+    included: standardIncluded(),
     excluded: genericExcluded,
     meetingPoint: "Ouarzazate",
   },
@@ -403,7 +412,7 @@ export const tours: Tour[] = [
       { day: 4, title: "From M'Hamid to Zagora and Ouarzazate via Draa Valley", description: "Depart by 4x4 to M'Hamid, meeting nomadic families and exploring Berber villages, then travel through Zagora and the palm-lined Draa Valley to Ouarzazate for film studio visits and an overnight in a luxury kasbah near Aït Ben Haddou." },
       { day: 5, title: "Kasbah Visits and High Atlas Crossing to Marrakech", description: "Explore the iconic Aït Ben Haddou kasbah, a UNESCO World Heritage filming location, then Kasbah Glaoui, before crossing the High Atlas via Tizi n'Tichka Pass with photo stops of mountain-perched Berber villages, concluding in Marrakech." },
     ],
-    included: genericIncluded,
+    included: standardIncluded("Erg Chigaga"),
     excluded: genericExcluded,
     meetingPoint: "Agadir",
   },
@@ -463,7 +472,7 @@ export const tours: Tour[] = [
     days: 10,
     nights: 9,
     summary:
-      "Morocco's rich tapestry of history, culture, and stunning landscapes: imperial cities, the blue streets of Chefchaouen, Roman ruins, the Sahara Desert, and mountain gorges, ending in Marrakech or Casablanca.",
+      "Morocco's north-to-south classic in ten days: Rabat, blue-washed Chefchaouen, the Volubilis ruins, Fes's medina, a night in the Erg Chebbi dunes, and the Todra and Dades gorges, ending in Marrakech.",
     highlights: [
       "Airport pickup and transfers included",
       "The Hassan II Mosque in Casablanca",
@@ -527,7 +536,7 @@ export const tours: Tour[] = [
       { day: 6, title: "Aït Benhaddou → Marrakech via High Atlas", description: "Tour the UNESCO-listed ksar of Aït Benhaddou, ascend the High Atlas via Tizi n'Tichka Pass with views of Mount Toubkal, and spend the evening in Marrakech at Jemaa el-Fna." },
       { day: 7, title: "Marrakech Cultural Immersion & Departure", description: "Explore the Koutoubia Mosque and gardens, wander the maze-like souks, visit the Ben Youssef Madrasa, then transfer to the airport in the evening." },
     ],
-    included: genericIncluded,
+    included: standardIncluded(),
     excluded: genericExcluded,
     meetingPoint: "Casablanca",
   },
@@ -560,7 +569,7 @@ export const tours: Tour[] = [
       { day: 7, title: "Discover Marrakech with Local Guide", description: "\"Red City\" exploration including the Koutoubia Mosque, colorful souks, the Bahia Palace, Majorelle Garden, the Saadian Tombs, and Jemaa el-Fna square." },
       { day: 8, title: "Departure from Marrakech", description: "A final breakfast followed by an airport transfer, concluding the tour." },
     ],
-    included: genericIncluded,
+    included: standardIncluded(),
     excluded: genericExcluded,
     meetingPoint: "Casablanca",
   },
@@ -571,7 +580,7 @@ export const tours: Tour[] = [
     days: 5,
     nights: 4,
     summary:
-      "Cultural heritage and breathtaking landscapes from Casablanca through Rabat, Fes, the Atlas Mountains, Sahara Desert, and Ouarzazate, concluding in Marrakech.",
+      "A fast five days from Casablanca through Rabat and Fes to a night in the Merzouga dunes, then Todra Gorge and Ouarzazate's film studios before Marrakech.",
     highlights: [
       "Casablanca's iconic sites",
       "Rabat's royal heritage and coastal charm",
@@ -591,7 +600,7 @@ export const tours: Tour[] = [
       { day: 4, title: "Merzouga – Rissani – Todra Gorge – Dades Gorge", description: "An early camel ride back to Merzouga village, visit Rissani's souk, hike Todra Gorge's canyon walls, and arrive at Dades Gorge for the night." },
       { day: 5, title: "Dades Gorge – Ouarzazate – Ait Ben Haddou – Marrakech", description: "Visit the film studios in Ouarzazate, drive via Tizi n'Tichka Pass with panoramic Atlas views, and arrive in Marrakech where the private tour concludes." },
     ],
-    included: genericIncluded,
+    included: standardIncluded(),
     excluded: genericExcluded,
     meetingPoint: "Casablanca",
   },
@@ -627,7 +636,7 @@ export const tours: Tour[] = [
       { day: 9, title: "Guided Tour of Marrakech", description: "Discover the Majorelle Gardens, the Koutoubia Mosque, the Saadian Tombs, and the Bahia Palace, then explore the souks and Jemaa el-Fnaa square." },
       { day: 10, title: "Departure from Marrakech", description: "Free time before your transfer to Marrakech Airport." },
     ],
-    included: genericIncluded,
+    included: standardIncluded(),
     excluded: genericExcluded,
     meetingPoint: "Tangier",
   },
@@ -657,7 +666,7 @@ export const tours: Tour[] = [
       { day: 5, title: "Ouarzazate to Marrakech", description: "An optional film studios visit, then Ait Ben Haddou, a UNESCO World Heritage site featured in numerous films, before crossing the High Atlas via Tizi Ntichka Pass to Marrakech." },
       { day: 6, title: "Marrakech Departure", description: "A leisurely morning in Marrakech before an airport transfer." },
     ],
-    included: genericIncluded,
+    included: standardIncluded(),
     excluded: genericExcluded,
     meetingPoint: "Tangier",
   },
@@ -668,7 +677,7 @@ export const tours: Tour[] = [
     days: 8,
     nights: 7,
     summary:
-      "The rich cultural heritage and stunning landscapes of northern and central Morocco: from the cosmopolitan port of Tangier and the Andalusian charm of Tetouan to the blue hues of Chefchaouen, Roman ruins, and imperial cities.",
+      "A northern loop with no desert leg: Tangier's port and medina, Andalusian-influenced Tetouan, the blue lanes of Chefchaouen, the Volubilis Roman ruins, and the imperial cities of Meknes, Fez, and Rabat.",
     highlights: [
       "A panoramic city tour and cultural exploration of Tangier",
       "Tetouan, Morocco's most Andalusian-influenced city",
@@ -688,7 +697,11 @@ export const tours: Tour[] = [
       { day: 7, title: "Rabat – Tangier", description: "Travel back to Tangier via highway, checking into your hotel for a restful evening." },
       { day: 8, title: "Departure from Tangier", description: "Transfer to Tangier Airport according to your flight schedule." },
     ],
-    included: genericIncluded,
+    included: [
+      "Private transport (4x4 or minivan) with an English-speaking driver-guide",
+      "Accommodation as specified in the itinerary (hotels, riads)",
+      "All activities and guided visits mentioned in the itinerary",
+    ],
     excluded: genericExcluded,
     meetingPoint: "Tangier",
   },
@@ -722,7 +735,7 @@ export const tours: Tour[] = [
       { day: 7, title: "Discover Marrakech", description: "A local guide leads you through the Koutoubia Mosque, the Saadian Tombs, the Majorelle Gardens, the Bahia Palace, and Jemaa el-Fnaa Square." },
       { day: 8, title: "Departure", description: "Transfer to Marrakech Airport for your onward journey." },
     ],
-    included: genericIncluded,
+    included: standardIncluded(),
     excluded: genericExcluded,
     meetingPoint: "N 05, Derb Skallia, Douh, Fès 30000, Morocco",
   },
@@ -751,7 +764,13 @@ export const tours: Tour[] = [
       { day: 5, title: "Moroccan Cooking Class & Hammam Experience – A Day of Indulgence", description: "A hands-on Moroccan cooking workshop learning dishes like tagine, pastilla, or harira soup, followed by a traditional hammam bath and massage." },
       { day: 6, title: "Departure from Fes – Farewell to Morocco", description: "A relaxed morning before your driver transfers you to the airport." },
     ],
-    included: genericIncluded,
+    included: [
+      "Private transport (4x4 or minivan) with an English-speaking driver-guide",
+      "Accommodation as specified in the itinerary (riads and hotels)",
+      "A Moroccan cooking class",
+      "A hammam and massage session",
+      "All guided visits mentioned in the itinerary",
+    ],
     excluded: genericExcluded,
     meetingPoint: "N 05, Derb Skallia, Douh, Fès 30000, Morocco",
   },
@@ -786,7 +805,7 @@ export const tours: Tour[] = [
       { day: 6, title: "Marrakech to Rabat via Casablanca", description: "Explore Casablanca including Mohamed V Square and the Hassan II Mosque, then continue to Rabat to visit the Kasbah of Udaya and the Hassan Tower." },
       { day: 7, title: "Rabat to Fes via Meknes and Volubilis", description: "Marvel at the Volubilis Roman ruins, then visit Meknes to see the Mausoleum of Moulay Ismail and monumental gates like Bab El-Mansour." },
     ],
-    included: genericIncluded,
+    included: standardIncluded(),
     excluded: genericExcluded,
     meetingPoint: "N 05, Derb Skallia, Douh, Fès 30000, Morocco",
   },
@@ -831,7 +850,7 @@ export const tours: Tour[] = [
     days: 5,
     nights: 4,
     summary:
-      "The breathtaking landscapes of Morocco's Sahara Desert, crossing the Middle Atlas Mountains, camel trekking across Erg Chebbi dunes, and camping under the stars, before passing dramatic gorges and Ait Ben Haddou en route to Marrakech.",
+      "Fes to Marrakech in five days via the Sahara: the Middle Atlas cedar forests, a night camping in the Erg Chebbi dunes, Todra and Dades gorges, and Aït Ben Haddou.",
     highlights: [
       "The scenic Middle Atlas Mountains en route to the Sahara",
       "A camel trek through the dunes of Erg Chebbi at sunset",
@@ -908,7 +927,7 @@ export const tours: Tour[] = [
     nights: 3,
     featured: true,
     summary:
-      "A breathtaking trip beginning in vibrant Marrakech and concluding in the ancient cultural capital of Fes, traversing the High Atlas Mountains, historic kasbahs, and vast Saharan landscapes.",
+      "Marrakech to Fes in four days via the desert, with a free day in Merzouga to pick your own activities — sandboarding, quad biking, or just resting after the dunes — before heading north.",
     highlights: [
       "A scenic drive through the High Atlas Mountains via Tizi n'Tichka Pass",
       "A guided visit to Ait Ben Haddou, a UNESCO World Heritage Site",
@@ -1163,7 +1182,7 @@ export const tours: Tour[] = [
     days: 10,
     nights: 9,
     summary:
-      "A comprehensive Moroccan journey blending imperial cities and serene desert landscapes, customizable from luxury private drivers and glamping to mountain treks and coastal exploration.",
+      "Ten days from Casablanca covering all four imperial cities, a night camping in the Erg Chebbi dunes, and the High Atlas — the full grand loop for travelers who want it all in one trip.",
     highlights: [
       "The intricate craftsmanship of the Hassan II Mosque",
       "The brilliant blue streets of Chefchaouen",
@@ -1213,7 +1232,7 @@ export const tours: Tour[] = [
     days: 9,
     nights: 8,
     summary:
-      "Morocco's imperial heritage and natural wonders: Casablanca, all four imperial cities, the Atlas Mountains, and nights in both traditional riads and a Berber-style tent in the Sahara.",
+      "A tighter, nine-day version of the classic Casablanca grand loop — the same four imperial cities and a night in the Sahara dunes, condensed for travelers with a shorter window.",
     highlights: [
       "The Hassan II Mosque's intricate craftsmanship",
       "Chefchaouen's brilliant blue streets",
@@ -1331,7 +1350,7 @@ export const tours: Tour[] = [
       { day: 8, title: "Dades Valley to Marrakech via Ouarzazate", description: "The Valley of Roses, the Ouarzazate film studios, and Aït Ben Haddou, crossing the High Atlas via Tizi n'Tichka Pass to Marrakech." },
       { day: 9, title: "Marrakech & Departure", description: "A final walk through Marrakech's medina and Jemaa el-Fna before your onward transfer." },
     ],
-    included: genericIncluded,
+    included: standardIncluded(),
     excluded: genericExcluded,
     meetingPoint: "N 05, Derb Skallia, Douh, Fès 30000, Morocco",
   },
@@ -1378,8 +1397,14 @@ export function getTourFaqs(tour: Tour): TourFaq[] {
         "Yes — dates, pace, and stops can be tailored to your interests. Send an inquiry and we'll adjust this route around you.",
     },
     {
-      question: "What's included in the price?",
+      question: "What's included in this tour?",
       answer: `${tour.included.slice(0, 3).join(", ")}, plus everything else listed in the full inclusions below.`,
+    },
+    {
+      question: "Where does the tour start and end?",
+      answer: tour.meetingPoint
+        ? `Pickup is from ${tour.meetingPoint}. Tell us your flight or hotel details and we'll confirm the exact meeting time.`
+        : `This tour starts in ${tour.departureCity} — tell us your flight or hotel details and we'll confirm the exact pickup point and time.`,
     },
   ];
 }

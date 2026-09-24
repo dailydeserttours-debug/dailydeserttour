@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { TourCard } from "@/components/TourCard";
-import type { Tour } from "@/data/tours";
+import type { TourSummary } from "@/data/tours";
 
 const durationBuckets = [
   { label: "All durations", test: () => true },
@@ -12,7 +12,7 @@ const durationBuckets = [
   { label: "8+ Days", test: (d: number) => d >= 8 },
 ];
 
-export function TripExplorer({ tours, cities }: { tours: Tour[]; cities: string[] }) {
+export function TripExplorer({ tours, cities }: { tours: TourSummary[]; cities: string[] }) {
   const [query, setQuery] = useState("");
   const [city, setCity] = useState("All cities");
   const [durationIndex, setDurationIndex] = useState(0);
@@ -30,6 +30,7 @@ export function TripExplorer({ tours, cities }: { tours: Tour[]; cities: string[
 
   return (
     <div>
+      <h2 className="sr-only">Browse and filter all tours</h2>
       <div className="flex flex-col gap-3 rounded-2xl border border-sand-200 bg-white p-4 sm:flex-row sm:items-center">
         <div className="relative flex-1">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-night-400" />

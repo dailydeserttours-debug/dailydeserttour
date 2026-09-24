@@ -4,6 +4,8 @@ import { contactInfo } from "@/data/site";
 export const metadata: Metadata = {
   title: "Terms & Conditions",
   description: "Terms and conditions for booking with Daily Desert Tours.",
+  // Placeholder copy — keep deindexed until real, reviewed terms text replaces it.
+  robots: { index: false, follow: true },
 };
 
 export default function TermsPage() {

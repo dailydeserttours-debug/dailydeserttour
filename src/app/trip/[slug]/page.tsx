@@ -8,7 +8,10 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { FaqSection } from "@/components/FaqSection";
 import { tours, getTourBySlug, getRelatedTours, getTourFaqs } from "@/data/tours";
+import { blogPosts, getRecentBlogPosts } from "@/data/blog";
 import { contactInfo, siteConfig } from "@/data/site";
+import { BlogCard } from "@/components/BlogCard";
+import { overlapScore } from "@/lib/related";
 
 export function generateStaticParams() {
   return tours.map((tour) => ({ slug: tour.slug }));
@@ -62,6 +65,20 @@ export default async function TourDetailPage({
 
   const faqs = getTourFaqs(tour);
   const related = getRelatedTours(tour);
+
+  const scoredPosts = blogPosts
+    .map((post) => ({
+      post,
+      score: overlapScore(
+        `${tour.title} ${tour.summary} ${tour.departureCity} ${tour.highlights.join(" ")}`,
+        `${post.title} ${post.excerpt}`,
+      ),
+    }))
+    .sort((a, b) => b.score - a.score);
+  const relatedPosts = (scoredPosts[0]?.score ?? 0) > 0
+    ? scoredPosts.slice(0, 3).map((entry) => entry.post)
+    : getRecentBlogPosts(3);
+
   const tripSchema = {
     "@context": "https://schema.org",
     "@type": "TouristTrip",
@@ -157,10 +174,10 @@ export default async function TourDetailPage({
 
           <div className="grid gap-8 sm:grid-cols-2">
             <div>
-              <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-night-800">
+              <h2 className="flex items-center gap-2 font-display text-lg font-semibold text-night-800">
                 <CheckCircle2 className="h-5 w-5 text-terracotta-600" />
                 What&rsquo;s Included
-              </h3>
+              </h2>
               <ul className="mt-3 space-y-2 text-sm text-night-600">
                 {tour.included.map((item) => (
                   <li key={item} className="flex items-start gap-2">
@@ -171,10 +188,10 @@ export default async function TourDetailPage({
               </ul>
             </div>
             <div>
-              <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-night-800">
+              <h2 className="flex items-center gap-2 font-display text-lg font-semibold text-night-800">
                 <XCircle className="h-5 w-5 text-night-400" />
                 What&rsquo;s Excluded
-              </h3>
+              </h2>
               <ul className="mt-3 space-y-2 text-sm text-night-600">
                 {tour.excluded.map((item) => (
                   <li key={item} className="flex items-start gap-2">
@@ -257,6 +274,24 @@ export default async function TourDetailPage({
                     </h3>
                   </div>
                 </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {relatedPosts.length > 0 && (
+        <section className={`py-14 ${related.length > 0 ? "border-t border-sand-200" : ""}`}>
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-wrap items-end justify-between gap-3">
+              <h2 className="font-display text-2xl font-semibold text-night-800">From the blog</h2>
+              <Link href="/blog" className="text-sm font-semibold text-terracotta-600 hover:text-terracotta-700">
+                All articles
+              </Link>
+            </div>
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedPosts.map((post) => (
+                <BlogCard key={post.slug} post={post} />
               ))}
             </div>
           </div>

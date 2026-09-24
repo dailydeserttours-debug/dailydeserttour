@@ -27,7 +27,17 @@ export default function TripListPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <TripExplorer tours={tours} cities={departureCities} />
+        <TripExplorer
+          tours={tours.map(({ slug, title, departureCity, days, nights, summary }) => ({
+            slug,
+            title,
+            departureCity,
+            days,
+            nights,
+            summary,
+          }))}
+          cities={departureCities}
+        />
       </section>
 
       <section className="border-t border-sand-200 bg-sand-50 py-16">

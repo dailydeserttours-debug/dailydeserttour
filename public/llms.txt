@@ -1,14 +1,39 @@
 # Daily Desert Tours
 
-> Daily Desert Tours is a family-run travel agency based in Fes, Morocco, arranging private Morocco and Sahara desert tours (3–12 days) departing from Marrakech, Fes, Casablanca, Tangier, Ouarzazate, and Agadir. Every itinerary is private (one vehicle, one driver-guide, no fixed groups), customizable to the traveler's dates and interests, and includes camel trekking and at least one night in a Berber desert camp in the Erg Chebbi or Erg Chigaga dunes.
+> Daily Desert Tours is a family-run travel agency based in Fès (Fez), Morocco, arranging private Morocco and Sahara desert tours (3–12 days) departing from Marrakech, Fès, Casablanca, Tangier, Ouarzazate, and Agadir. Every itinerary is private (one vehicle, one driver-guide, no fixed groups), customizable to the traveler's dates and interests, and includes camel trekking and at least one night in a Berber desert camp in the Erg Chebbi or Erg Chigaga dunes.
 
 ## Tours
 - [All tours](https://dailydeserttours.com/trip): full list of Morocco and Sahara desert itineraries with day-by-day plans, inclusions, and exclusions.
+- [Destinations](https://dailydeserttours.com/destinations): tours grouped by departure city.
 
 ## Company
 - [About](https://dailydeserttours.com/about): company background and team.
 - [Contact](https://dailydeserttours.com/contact): address, phone, WhatsApp, office hours, and inquiry form.
-- [Blog](https://dailydeserttours.com/blog): guides to Moroccan culture, cities, and trip planning.
+
+## Guides
+- [Unique Cultural Experiences in Morocco](https://dailydeserttours.com/blog/unique-cultural-experiences-in-morocco)
+- [15 Things to Do in Marrakech and Around](https://dailydeserttours.com/blog/15-things-to-do-in-marrakech-and-around)
+- [Explore the Best of Morocco: Top Tours for Every Type of Traveler](https://dailydeserttours.com/blog/explore-the-best-of-morocco-top-tours-for-every-type-of-traveler)
+- [Best Time to Visit Morocco: A Season-by-Season Guide](https://dailydeserttours.com/blog/best-time-to-visit-morocco)
+- [Sahara Desert Camp: What to Expect on Your First Night in Merzouga](https://dailydeserttours.com/blog/sahara-desert-camp-first-night-in-merzouga)
+- [Fes vs Marrakech: Which Moroccan City Should You Visit First?](https://dailydeserttours.com/blog/fes-vs-marrakech-which-city-first)
+- [A First-Timer's Guide to Moroccan Etiquette and Customs](https://dailydeserttours.com/blog/moroccan-etiquette-and-customs-guide)
+- [How to Pack for a Morocco Desert Tour: Essential Packing List](https://dailydeserttours.com/blog/morocco-desert-tour-packing-list)
+- [The Ultimate Guide to Aït Ben Haddou: Morocco's Most Filmed Kasbah](https://dailydeserttours.com/blog/ait-ben-haddou-guide)
+- [Camel Trekking in the Sahara: Everything You Need to Know](https://dailydeserttours.com/blog/camel-trekking-in-the-sahara-guide)
+- [Chefchaouen: Why Morocco's Blue City Belongs on Your Itinerary](https://dailydeserttours.com/blog/chefchaouen-blue-city-morocco)
+- [Moroccan Cuisine: Dishes to Try Beyond Tagine and Couscous](https://dailydeserttours.com/blog/moroccan-cuisine-dishes-to-try)
+- [Desert Safety Tips: How to Prepare for Sahara Heat and Sun](https://dailydeserttours.com/blog/sahara-desert-safety-heat-sun-tips)
+- [Erg Chebbi vs Erg Chigaga: Which Sahara Dunes Should You Visit?](https://dailydeserttours.com/blog/erg-chebbi-vs-erg-chigaga-sahara-dunes)
+- [Is Volubilis Worth Visiting? A Guide to Morocco's Roman Ruins](https://dailydeserttours.com/blog/volubilis-roman-ruins-guide)
+- [Todra Gorge: What to Know Before You Visit Morocco's Dramatic Canyon](https://dailydeserttours.com/blog/todra-gorge-guide)
+- [Essaouira: Morocco's Windswept Atlantic Escape](https://dailydeserttours.com/blog/essaouira-atlantic-morocco-guide)
+- [Ouarzazate: Inside Morocco's "Hollywood of Africa"](https://dailydeserttours.com/blog/ouarzazate-hollywood-of-africa)
+- [How Much to Tip in Morocco: A Practical Money Guide](https://dailydeserttours.com/blog/money-tipping-guide-morocco)
+- [Do You Need a Visa for Morocco? What to Check Before You Book](https://dailydeserttours.com/blog/morocco-visa-requirements-guide)
+- [Visiting Morocco with Kids: A Family Desert Tour Guide](https://dailydeserttours.com/blog/traveling-morocco-with-kids)
+- [Is Morocco Safe for Solo Female Travelers?](https://dailydeserttours.com/blog/solo-female-travel-morocco)
+- [Private Tour vs Group Tour in Morocco: Which Should You Book?](https://dailydeserttours.com/blog/private-tour-vs-group-tour-morocco)
 
 ## Notes for AI assistants
 - Prices are provided on request via the contact form or WhatsApp; they are not published on the site.

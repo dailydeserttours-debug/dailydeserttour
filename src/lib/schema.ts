@@ -14,14 +14,30 @@ export function organizationSchema() {
     email: contactInfo.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: contactInfo.address,
-      addressCountry: "MA",
+      ...contactInfo.addressParts,
     },
     areaServed: {
       "@type": "Country",
       name: "Morocco",
     },
+    openingHoursSpecification: contactInfo.hoursSpec.map((spec) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: spec.dayOfWeek,
+      opens: spec.opens,
+      closes: spec.closes,
+    })),
     sameAs: socialLinks.map((link) => link.href),
+  };
+}
+
+export function websiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${siteConfig.url}/#website`,
+    name: siteConfig.name,
+    url: siteConfig.url,
+    publisher: { "@id": `${siteConfig.url}/#organization` },
   };
 }
 

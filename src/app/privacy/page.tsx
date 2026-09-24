@@ -4,6 +4,8 @@ import { contactInfo } from "@/data/site";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "Privacy policy for Daily Desert Tours.",
+  // Placeholder copy — keep deindexed until real, reviewed policy text replaces it.
+  robots: { index: false, follow: true },
 };
 
 export default function PrivacyPage() {

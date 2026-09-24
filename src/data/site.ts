@@ -2,12 +2,19 @@ export const siteConfig = {
   name: "Daily Desert Tours",
   tagline: "Your Moroccan Adventure Starts With Us",
   description:
-    "Experience the thrill of our tours! Enjoy expert guides, breathtaking landscapes, and immersive cultural experiences. We prioritize safety and comfort, ensuring unforgettable memories.",
+    "A small, family-run team based in Fès, building private Morocco and Sahara trips around how you actually like to travel — not a fixed bus tour.",
   url: "https://dailydeserttours.com",
 };
 
 export const contactInfo = {
   address: "N 05, Derb Skallia, Douh, Fès 30000, Morocco",
+  // Machine-readable form of `address` above, for PostalAddress schema.
+  addressParts: {
+    streetAddress: "N 05, Derb Skallia, Douh",
+    addressLocality: "Fès",
+    postalCode: "30000",
+    addressCountry: "MA",
+  },
   email: "info@dailydeserttours.com",
   phone: "+212 666-151703",
   phoneHref: "tel:+212666151703",
@@ -18,16 +25,18 @@ export const contactInfo = {
     { days: "Monday – Friday", time: "8:30 AM – 8:00 PM" },
     { days: "Saturday & Sunday", time: "9:30 AM – 9:30 PM" },
   ],
+  // Machine-readable form of `hours` above, for OpeningHoursSpecification schema.
+  hoursSpec: [
+    { dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "08:30", closes: "20:00" },
+    { dayOfWeek: ["Saturday", "Sunday"], opens: "09:30", closes: "21:30" },
+  ],
   mapEmbedSrc:
     "https://www.google.com/maps?q=N+05,+Derb+Skallia,+Douh,+F%C3%A8s+30000,+Morocco&output=embed",
 };
 
-export const socialLinks = [
-  { name: "Facebook", href: "https://www.facebook.com/" },
-  { name: "Twitter", href: "https://twitter.com/" },
-  { name: "Instagram", href: "https://www.instagram.com/daily_desert_tours/" },
-  { name: "Pinterest", href: "https://www.pinterest.com/" },
-];
+// Only list profiles that are real — a link to a bare, generic homepage is worse than no
+// link at all, since it implies a verified presence that doesn't exist.
+export const socialLinks = [{ name: "Instagram", href: "https://www.instagram.com/daily_desert_tours/" }];
 
 export const navLinks = [
   { label: "Home", href: "/" },
@@ -55,7 +64,7 @@ export const featureList = [
       "Our driver-guides grew up in these landscapes and share the stories maps can't show you.",
   },
   {
-    title: "Eco-Friendly Practices",
+    title: "Local-First & Sustainable",
     description:
       "We support local artisans, businesses, and sustainable tourism to help preserve Morocco's heritage.",
   },
@@ -65,21 +74,18 @@ export const featureList = [
       "Plans change — our itineraries and booking process are built to flex with you.",
   },
   {
-    title: "Customizable Options",
+    title: "Always Reachable",
     description:
-      "From private departures to add-on excursions, your trip can be built exactly to your needs.",
+      "WhatsApp us anytime — we usually reply the same day, even before you've booked anything.",
   },
   {
-    title: "Positive Reviews",
+    title: "Genuine Hospitality",
     description:
-      "A track record of happy travelers who came for the desert and left with a second family.",
+      "Guests often tell us they left with a second family in Morocco, not just a photo album.",
   },
 ];
 
-export const stats = [
-  { value: "100%", label: "A+ Results" },
-  { value: "+1000", label: "Happy Clients" },
-];
+export const stats = [{ value: "+1000", label: "Happy Clients" }];
 
 export const heroChapters = [
   {
@@ -88,9 +94,9 @@ export const heroChapters = [
     alt: "A Berber guide leading two camels across the Erg Chebbi dunes at golden hour",
     location: "Merzouga · Morocco",
     kicker: "The Sahara",
-    headline: ["Where silence", "becomes the journey"] as [string, string],
-    body: "Private desert journeys shaped around your pace, your interests and the places you want to discover.",
-    cta: { label: "Explore the Sahara", href: "/trip" },
+    headline: ["Let's get you", "into the dunes"] as [string, string],
+    body: "Tell us your dates and what you're into, and we'll build a private desert trip around it — no fixed groups, no rushing.",
+    cta: { label: "Plan your Sahara trip", href: "/trip" },
   },
   {
     id: "morocco",
@@ -98,9 +104,9 @@ export const heroChapters = [
     alt: "Hot air balloons lifting off at dawn over the Marrakech palm grove, Atlas Mountains behind",
     location: "Private Morocco journeys",
     kicker: "Morocco",
-    headline: ["A journey", "beyond the expected"] as [string, string],
-    body: "From ancient medinas to remote landscapes, experience Morocco through the people and places that define it.",
-    cta: { label: "Discover Morocco", href: "/trip" },
+    headline: ["Morocco, the way", "we'd show a friend"] as [string, string],
+    body: "Skip the rushed checklist — we'll take you into medina kitchens, mountain villages, and the kind of evenings you end up telling everyone about.",
+    cta: { label: "See how we'd plan it", href: "/trip" },
   },
   {
     id: "camp",
@@ -108,9 +114,9 @@ export const heroChapters = [
     alt: "A guest walking toward lantern-lit Berber tents at dusk in the Sahara",
     location: "Private desert camp · Merzouga",
     kicker: "Desert camp",
-    headline: ["Under", "Moroccan skies"] as [string, string],
-    body: "Sleep beneath the stars. Wake with the desert.",
-    cta: { label: "Experience the desert", href: "/trip" },
+    headline: ["A warm welcome,", "wherever we camp"] as [string, string],
+    body: "Mint tea by the fire, more stars than you've ever seen, and a Berber camp crew who are genuinely glad you're there.",
+    cta: { label: "See a night in camp", href: "/trip" },
   },
   {
     id: "culture",
@@ -118,9 +124,9 @@ export const heroChapters = [
     alt: "A cobalt-blue stairway lined with woven baskets and textiles in Chefchaouen",
     location: "Culture · heritage · discovery",
     kicker: "Culture",
-    headline: ["The soul", "of Morocco"] as [string, string],
-    body: "Ancient cities, living traditions and stories that stay with you.",
-    cta: { label: "Explore our journeys", href: "/trip" },
+    headline: ["Meet the Morocco", "we grew up in"] as [string, string],
+    body: "Our guides show you their own hometowns — the workshops, the family recipes, the streets they still call home.",
+    cta: { label: "Meet our guides", href: "/about" },
   },
 ];
 
