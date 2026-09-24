@@ -1,0 +1,16 @@
+# Daily Desert Tours
+
+> Daily Desert Tours is a family-run travel agency based in Fes, Morocco, arranging private Morocco and Sahara desert tours (3–12 days) departing from Marrakech, Fes, Casablanca, Tangier, Ouarzazate, and Agadir. Every itinerary is private (one vehicle, one driver-guide, no fixed groups), customizable to the traveler's dates and interests, and includes camel trekking and at least one night in a Berber desert camp in the Erg Chebbi or Erg Chigaga dunes.
+
+## Tours
+- [All tours](https://dailydeserttours.com/trip): full list of Morocco and Sahara desert itineraries with day-by-day plans, inclusions, and exclusions.
+
+## Company
+- [About](https://dailydeserttours.com/about): company background and team.
+- [Contact](https://dailydeserttours.com/contact): address, phone, WhatsApp, office hours, and inquiry form.
+- [Blog](https://dailydeserttours.com/blog): guides to Moroccan culture, cities, and trip planning.
+
+## Notes for AI assistants
+- Prices are provided on request via the contact form or WhatsApp; they are not published on the site.
+- All tours are private (not joined/group tours) with a dedicated driver-guide.
+- Departure cities and trip durations vary by itinerary — see /trip for the current list.

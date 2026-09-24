@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+:root {
+  --background: #faf6ef;
+  --foreground: #241a12;
+
+  --color-sand-50: #faf6ef;
+  --color-sand-100: #f3ead9;
+  --color-sand-200: #e7d3ae;
+  --color-sand-300: #dab97f;
+  --color-sand-400: #cc9f57;
+  --color-sand-500: #b8863f;
+
+  --color-terracotta-400: #d97a4d;
+  --color-terracotta-500: #c05f37;
+  --color-terracotta-600: #a2492a;
+  --color-terracotta-700: #833a22;
+
+  --color-night-500: #2c3350;
+  --color-night-600: #202540;
+  --color-night-700: #171b30;
+  --color-night-800: #10121f;
+  --color-night-900: #0a0b14;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-sand-50: var(--color-sand-50);
+  --color-sand-100: var(--color-sand-100);
+  --color-sand-200: var(--color-sand-200);
+  --color-sand-300: var(--color-sand-300);
+  --color-sand-400: var(--color-sand-400);
+  --color-sand-500: var(--color-sand-500);
+
+  --color-terracotta-400: var(--color-terracotta-400);
+  --color-terracotta-500: var(--color-terracotta-500);
+  --color-terracotta-600: var(--color-terracotta-600);
+  --color-terracotta-700: var(--color-terracotta-700);
+
+  --color-night-500: var(--color-night-500);
+  --color-night-600: var(--color-night-600);
+  --color-night-700: var(--color-night-700);
+  --color-night-800: var(--color-night-800);
+  --color-night-900: var(--color-night-900);
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+::selection {
+  background: var(--color-terracotta-400);
+  color: white;
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
