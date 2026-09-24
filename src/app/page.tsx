@@ -18,9 +18,9 @@ export const metadata: Metadata = {
 
 const featureIcons = [Sparkles, Compass, Leaf, CalendarClock, SlidersHorizontal, Star];
 
-function Kicker({ children }: { children: React.ReactNode }) {
+function Kicker({ children, center = false }: { children: React.ReactNode; center?: boolean }) {
   return (
-    <div className="flex items-center gap-3">
+    <div className={`flex items-center gap-3 ${center ? "justify-center" : ""}`}>
       <span className="h-px w-8 bg-terracotta-500" />
       <p className="text-sm font-medium text-terracotta-700">{children}</p>
     </div>
@@ -38,8 +38,8 @@ export default function HomePage() {
       {/* Features */}
       <section className="bg-sand-50 py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <Kicker>Why travel with us</Kicker>
+          <div className="mx-auto max-w-2xl text-center">
+            <Kicker center>Why travel with us</Kicker>
             <h2 className="mt-3 font-display text-3xl font-semibold text-night-800 sm:text-4xl">
               Built around the way you actually want to travel
             </h2>
