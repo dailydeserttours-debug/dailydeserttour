@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, X, Phone } from "lucide-react";
-import { navLinks, contactInfo } from "@/data/site";
+import { Menu, X } from "lucide-react";
+import { navLinks } from "@/data/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -41,13 +41,6 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
-          <a
-            href={contactInfo.phoneHref}
-            className="flex items-center gap-2 text-sm font-medium text-night-700 hover:text-terracotta-600"
-          >
-            <Phone className="h-4 w-4" aria-hidden />
-            {contactInfo.phone}
-          </a>
           <Link
             href="/contact"
             className="rounded-full bg-terracotta-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-terracotta-700"

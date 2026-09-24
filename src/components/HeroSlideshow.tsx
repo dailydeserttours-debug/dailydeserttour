@@ -50,7 +50,7 @@ export function HeroSlideshow({ chapters }: { chapters: Chapter[] }) {
   const active = chapters[index];
 
   return (
-    <section className="relative isolate flex min-h-[70svh] items-center overflow-hidden bg-night-900" style={{ minHeight: "560px" }}>
+    <section className="relative isolate flex min-h-[88svh] items-center overflow-hidden bg-night-900" style={{ minHeight: "680px" }}>
       {/* Photography */}
       {chapters.map((chapter, i) => (
         <div
@@ -79,7 +79,7 @@ export function HeroSlideshow({ chapters }: { chapters: Chapter[] }) {
       <div className="absolute inset-0 bg-gradient-to-t from-night-900/85 via-night-900/25 to-night-900/20" />
 
       {/* Content */}
-      <div className="relative mx-auto w-full max-w-7xl px-4 py-14 text-center sm:px-6 lg:px-8">
+      <div className="relative mx-auto w-full max-w-7xl px-4 py-20 text-center sm:px-6 lg:px-8">
         <div key={active.id} className={reducedMotion ? "" : "animate-[fadein_700ms_ease-out]"}>
           <p className="text-xs font-medium uppercase tracking-[0.25em] text-sand-200/75">{active.location}</p>
 
@@ -103,7 +103,7 @@ export function HeroSlideshow({ chapters }: { chapters: Chapter[] }) {
         </div>
 
         {/* Chapter navigator */}
-        <div className="mx-auto mt-10 flex max-w-2xl items-center gap-4">
+        <div className="mx-auto mt-14 flex max-w-2xl items-center gap-4">
           <span className="text-xs tabular-nums tracking-widest text-sand-300/70">
             {String(index + 1).padStart(2, "0")} / {String(chapters.length).padStart(2, "0")}
           </span>
