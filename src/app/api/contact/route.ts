@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { contactInfo, siteConfig } from "@/data/site";
 
 interface ContactPayload {
   firstName?: string;
@@ -36,9 +37,33 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "Enter a valid email address." }, { status: 400 });
   }
 
-  // TODO: wire up a real email provider (e.g. Resend or Nodemailer) here once
-  // credentials exist, and forward this payload to info@dailydeserttours.com.
-  console.log("Contact form submission:", body);
+  try {
+    const formSubmitResponse = await fetch(`https://formsubmit.co/ajax/${contactInfo.email}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json", Referer: `${siteConfig.url}/contact` },
+      body: JSON.stringify({
+        _subject: `New website inquiry from ${body.firstName} ${body.lastName}`,
+        "First name": body.firstName,
+        "Last name": body.lastName,
+        Email: body.email,
+        "Tour interest": body.tourInterest || "Not specified",
+        "Group size": body.groupSize || "Not specified",
+        "Travel dates": body.travelDates || "Not specified",
+        Message: body.message,
+      }),
+    });
+
+    const result = await formSubmitResponse.json().catch(() => null);
+    if (!formSubmitResponse.ok || result?.success === "false" || result?.success === false) {
+      throw new Error(`FormSubmit rejected the request: ${JSON.stringify(result)}`);
+    }
+  } catch (err) {
+    console.error("Contact form delivery failed:", err, body);
+    return NextResponse.json(
+      { ok: false, error: "Couldn't send your message right now. Please try again or email us directly." },
+      { status: 502 },
+    );
+  }
 
   return NextResponse.json({ ok: true });
 }
