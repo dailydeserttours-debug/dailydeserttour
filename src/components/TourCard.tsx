@@ -2,11 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Clock, MapPin, ArrowUpRight } from "lucide-react";
 import type { TourSummary } from "@/data/tours";
+import { uiText, localizeHref, type Locale } from "@/data/i18n";
 
-export function TourCard({ tour }: { tour: TourSummary }) {
+export function TourCard({ tour, lang = "en" }: { tour: TourSummary; lang?: Locale }) {
+  const t = uiText[lang].tourCard;
   return (
     <Link
-      href={`/trip/${tour.slug}`}
+      href={localizeHref(`/trip/${tour.slug}`, lang)}
       className="group flex flex-col overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-sm transition-shadow hover:shadow-lg"
     >
       <div className="relative aspect-[4/3] w-full overflow-hidden">
@@ -22,7 +24,7 @@ export function TourCard({ tour }: { tour: TourSummary }) {
         <div className="flex items-center gap-3 text-xs font-medium text-terracotta-600">
           <span className="flex items-center gap-1">
             <Clock className="h-3.5 w-3.5" />
-            {tour.days} Days / {tour.nights} Nights
+            {tour.days} {t.days} / {tour.nights} {t.nights}
           </span>
           <span className="flex items-center gap-1 text-night-500">
             <MapPin className="h-3.5 w-3.5" />
@@ -34,7 +36,7 @@ export function TourCard({ tour }: { tour: TourSummary }) {
         </h3>
         <p className="mt-2 line-clamp-2 text-sm text-night-600">{tour.summary}</p>
         <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-terracotta-600">
-          View itinerary
+          {t.viewItinerary}
           <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </span>
       </div>

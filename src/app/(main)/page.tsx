@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: "Morocco Desert Tours | Private Sahara & Morocco Travel",
   description:
     "Private Morocco and Sahara desert tours from Marrakech, Fes, Casablanca, Tangier, Ouarzazate, and Agadir — camel trekking, desert camps, ancient kasbahs, and custom itineraries with a local driver-guide.",
-  alternates: { canonical: "/" },
+  alternates: { canonical: "/", languages: { en: "/", it: "/it" } },
 };
 
 const featureIcons = [Sparkles, Compass, Leaf, CalendarClock, SlidersHorizontal, Star];

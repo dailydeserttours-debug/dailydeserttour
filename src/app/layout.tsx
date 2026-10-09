@@ -3,10 +3,6 @@ import { Fraunces, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { JsonLd } from "@/components/JsonLd";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import { siteConfig } from "@/data/site";
@@ -49,20 +45,25 @@ export const metadata: Metadata = {
   },
 };
 
+// `headers()`/middleware-based locale detection would force every route into dynamic
+// rendering (it did, and broke static generation for all 78 pages — see git history).
+// This runs before paint and is JS-crawler-visible (Google et al. render JS), so it
+// corrects `<html lang>` for /it/* pages without sacrificing static generation.
+const SET_HTML_LANG_SCRIPT = `(function(){if(location.pathname==="/it"||location.pathname.indexOf("/it/")===0){document.documentElement.lang="it";}})();`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
       className={`${bodyFont.variable} ${displayFont.variable} h-full antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: SET_HTML_LANG_SCRIPT }} />
+      </head>
       <body className="min-h-full flex flex-col font-sans">
         <JsonLd data={organizationSchema()} />
         <JsonLd data={websiteSchema()} />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <WhatsAppButton />
-        <ScrollToTopButton />
+        {children}
         <Analytics />
         <SpeedInsights />
       </body>

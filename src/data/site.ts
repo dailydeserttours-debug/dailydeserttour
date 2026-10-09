@@ -38,18 +38,18 @@ export const contactInfo = {
 export const socialLinks = [{ name: "Instagram", href: "https://www.instagram.com/daily_desert_tours/" }];
 
 export const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Tours", href: "/trip" },
-  { label: "Destinations", href: "/destinations" },
-  { label: "About", href: "/about" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
-];
+  { key: "home", href: "/" },
+  { key: "tours", href: "/trip" },
+  { key: "destinations", href: "/destinations" },
+  { key: "about", href: "/about" },
+  { key: "blog", href: "/blog" },
+  { key: "contact", href: "/contact" },
+] as const;
 
 export const footerLinks = [
-  { label: "Privacy", href: "/privacy" },
-  { label: "Terms & Conditions", href: "/terms" },
-];
+  { key: "privacy", href: "/privacy" },
+  { key: "terms", href: "/terms" },
+] as const;
 
 export const featureList = [
   {
