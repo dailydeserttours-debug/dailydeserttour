@@ -3,7 +3,7 @@ export const siteConfig = {
   tagline: "Your Moroccan Adventure Starts With Us",
   description:
     "A small, family-run team based in Fès, building private Morocco and Sahara trips around how you actually like to travel — not a fixed bus tour.",
-  url: "https://dailydeserttours.com",
+  url: "https://www.dailydeserttours.com",
 };
 
 export const contactInfo = {
