@@ -20,7 +20,6 @@ export const contactInfo = {
   phoneHref: "tel:+212666151703",
   whatsapp: "+212 666 151 703",
   whatsappHref: "https://wa.me/212666151703",
-  secondaryPhone: "+34 664 714 047",
   hours: [
     { days: "Monday – Friday", time: "8:30 AM – 8:00 PM" },
     { days: "Saturday & Sunday", time: "9:30 AM – 9:30 PM" },

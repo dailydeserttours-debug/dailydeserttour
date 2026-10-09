@@ -75,10 +75,6 @@ export default function ContactPage() {
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="h-5 w-5 shrink-0 text-terracotta-600" />
-                <span>{contactInfo.secondaryPhone} <span className="text-night-400">(Spain)</span></span>
-              </li>
-              <li className="flex items-center gap-3">
                 <MessageCircle className="h-5 w-5 shrink-0 text-terracotta-600" />
                 <a href={contactInfo.whatsappHref} target="_blank" rel="noreferrer" className="hover:text-terracotta-700">
                   WhatsApp: {contactInfo.whatsapp}
