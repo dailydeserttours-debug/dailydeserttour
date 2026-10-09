@@ -5,6 +5,8 @@ import { Loader2, CheckCircle2, ArrowRight } from "lucide-react";
 import { contactInfo } from "@/data/site";
 import { tours } from "@/data/tours";
 
+const FORMSUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${contactInfo.email}`;
+
 const baseInputClass =
   "w-full rounded-lg border bg-sand-50 px-4 py-2.5 text-sm text-night-800 placeholder:text-night-400 focus:outline-none focus:ring-2";
 const validInputClass = "border-sand-200 focus:border-terracotta-500 focus:ring-terracotta-500/20";
@@ -87,8 +89,14 @@ export function ContactForm() {
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    // Honeypot — bots that autofill every field trip this hidden one.
+    // Honeypot — bots that autofill every field trip this hidden one; fake success, skip sending.
     const company = (new FormData(e.currentTarget).get("company") as string) ?? "";
+    if (company.trim()) {
+      setStatus("success");
+      setValues(initialValues);
+      setErrors({});
+      return;
+    }
 
     const fieldErrors = validateAll(values);
     if (Object.keys(fieldErrors).length > 0) {
@@ -100,18 +108,29 @@ export function ContactForm() {
     setErrorMessage("");
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(FORMSUBMIT_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, company }),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `New website inquiry from ${values.firstName} ${values.lastName}`,
+          "First name": values.firstName,
+          "Last name": values.lastName,
+          Email: values.email,
+          "Tour interest": values.tourInterest,
+          "Group size": values.groupSize,
+          "Travel dates": values.travelDates || "Not specified",
+          Message: values.message,
+        }),
       });
-      const result = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
-      if (!res.ok || !result?.ok) throw new Error(result?.error ?? "Request failed");
+      const result = (await res.json().catch(() => null)) as { success?: string | boolean } | null;
+      if (!res.ok || result?.success === "false" || result?.success === false) {
+        throw new Error("Request failed");
+      }
       setStatus("success");
       setValues(initialValues);
       setErrors({});
-    } catch (err) {
-      setErrorMessage(err instanceof Error && err.message !== "Request failed" ? err.message : "");
+    } catch {
+      setErrorMessage("");
       setStatus("error");
     }
   }

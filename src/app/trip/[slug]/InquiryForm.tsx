@@ -2,6 +2,9 @@
 
 import { useState, type FormEvent } from "react";
 import { Loader2, CheckCircle2 } from "lucide-react";
+import { contactInfo } from "@/data/site";
+
+const FORMSUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${contactInfo.email}`;
 
 const inputClass =
   "w-full rounded-lg border border-sand-300 bg-white px-3.5 py-2.5 text-sm text-night-800 placeholder:text-night-400 focus:border-terracotta-500 focus:outline-none focus:ring-2 focus:ring-terracotta-500/20";
@@ -14,15 +17,28 @@ export function InquiryForm({ tripName }: { tripName: string }) {
     e.preventDefault();
     setStatus("loading");
     const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
+    const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
 
     try {
-      const res = await fetch("/api/inquire", {
+      const res = await fetch(FORMSUBMIT_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `New trip inquiry: ${data.trip || "General"} — ${data.subject || ""}`,
+          Trip: data.trip || "Not specified",
+          Name: data.name,
+          Email: data.email,
+          Country: data.country || "Not specified",
+          Phone: data.phone || "Not specified",
+          Adults: data.adults || "Not specified",
+          Children: data.children || "Not specified",
+          Message: data.message,
+        }),
       });
-      if (!res.ok) throw new Error("Request failed");
+      const result = (await res.json().catch(() => null)) as { success?: string | boolean } | null;
+      if (!res.ok || result?.success === "false" || result?.success === false) {
+        throw new Error("Request failed");
+      }
       setStatus("success");
       form.reset();
     } catch {
