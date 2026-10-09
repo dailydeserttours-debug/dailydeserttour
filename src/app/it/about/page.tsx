@@ -5,85 +5,87 @@ import { ArrowRight, Heart, Sparkles, Users, Leaf, Compass, ClipboardList, HandH
 import { FaqSection } from "@/components/FaqSection";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
-import { contactInfo, aboutFaqs, stats, siteConfig } from "@/data/site";
+import { contactInfo, stats, siteConfig } from "@/data/site";
+import { aboutFaqsIt } from "@/data/site.it";
 
 export const metadata: Metadata = {
-  title: "About Us",
+  title: "Chi Siamo",
   description:
-    "A family-owned Moroccan travel agency sharing the desert, mountains, and medinas that shaped us — read our story.",
-  alternates: { canonical: "/about", languages: { en: "/about", it: "/it/about" } },
+    "Un'agenzia di viaggi marocchina a conduzione familiare che condivide il deserto, le montagne e le medine che ci hanno formato — scopri la nostra storia.",
+  alternates: { canonical: "/it/about", languages: { en: "/about", it: "/it/about" } },
 };
 
 const values = [
   {
     icon: Heart,
-    title: "A Family Touch",
-    body: "We treat every guest like part of our extended Moroccan family. When you explore with us, you're not just a traveler; you're a welcomed guest in our homeland.",
+    title: "Un tocco familiare",
+    body: "Trattiamo ogni ospite come parte della nostra famiglia marocchina allargata. Quando viaggi con noi, non sei solo un turista; sei un ospite benvenuto nella nostra terra.",
   },
   {
     icon: Sparkles,
-    title: "Expertise",
-    body: "Decades of experience passed down from our father — we know the hidden gems, secret spots, and unique encounters most itineraries miss.",
+    title: "Esperienza",
+    body: "Decenni di esperienza tramandati da nostro padre — conosciamo i luoghi nascosti, gli angoli segreti e gli incontri unici che la maggior parte degli itinerari si perde.",
   },
   {
     icon: Users,
-    title: "Customization",
-    body: "Your journey is unique, just like you. We take the time to understand your interests and craft personalized itineraries around them.",
+    title: "Personalizzazione",
+    body: "Il tuo viaggio è unico, proprio come te. Ci prendiamo il tempo di capire i tuoi interessi e costruiamo itinerari su misura intorno ad essi.",
   },
   {
     icon: Leaf,
-    title: "Sustainability",
-    body: "We cherish our communities and prioritize sustainable tourism. By supporting local artisans, businesses, and eco-friendly practices, we aim to preserve Morocco's cultural heritage for future generations.",
+    title: "Sostenibilità",
+    body: "Teniamo alle nostre comunità e diamo priorità a un turismo sostenibile. Sostenendo artigiani, attività locali e pratiche eco-compatibili, vogliamo preservare il patrimonio culturale del Marocco per le generazioni future.",
   },
 ];
 
 const teamRoles = [
   {
     icon: Compass,
-    title: "Guiding",
-    body: "On the road with you, showing you the routes and stops a map alone won't reveal.",
+    title: "Guida",
+    body: "Sulla strada con te, mostrandoti i percorsi e le tappe che una mappa da sola non può rivelare.",
   },
   {
     icon: ClipboardList,
-    title: "Logistics & Planning",
-    body: "Building the day-by-day route, matching camps and hotels to your dates and pace.",
+    title: "Logistica e Pianificazione",
+    body: "Costruiamo il percorso giorno per giorno, abbinando campi e hotel alle tue date e al tuo ritmo.",
   },
   {
     icon: HandHeart,
-    title: "Hospitality",
-    body: "Handling every inquiry and detail before you arrive, so the trip itself runs smoothly.",
+    title: "Ospitalità",
+    body: "Gestiamo ogni richiesta e dettaglio prima del tuo arrivo, così il viaggio stesso scorre senza intoppi.",
   },
 ];
 
-export default function AboutPage() {
+export default function ItAboutPage() {
   return (
     <>
       <JsonLd
         data={{
           "@context": "https://schema.org",
           "@type": "AboutPage",
-          name: "About Daily Desert Tours",
-          url: `${siteConfig.url}/about`,
+          name: "Chi è Daily Desert Tours",
+          url: `${siteConfig.url}/it/about`,
           mainEntity: { "@id": `${siteConfig.url}/#organization` },
+          inLanguage: "it",
         }}
       />
 
       <section className="bg-night-800 py-20">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-wide text-terracotta-400">About</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-terracotta-400">Chi siamo</p>
           <h1 className="mt-3 font-display text-4xl font-semibold text-white sm:text-5xl">
-            Discover Morocco Through the Eyes of a Family Tradition
+            Scopri il Marocco Attraverso gli Occhi di una Tradizione Familiare
           </h1>
         </div>
       </section>
 
-      <Breadcrumbs items={[{ name: "Home", url: "/" }, { name: "About", url: "/about" }]} />
+      <Breadcrumbs items={[{ name: "Home", url: "/it" }, { name: "Chi siamo", url: "/it/about" }]} />
 
       <section className="mx-auto flex max-w-4xl justify-center gap-6 px-4 py-10 text-center sm:px-6 lg:px-8">
         {stats.map((stat) => (
           <div key={stat.label}>
             <p className="font-display text-3xl font-semibold text-terracotta-600 sm:text-4xl">{stat.value}</p>
-            <p className="mt-1 text-sm text-night-500">{stat.label}</p>
+            <p className="mt-1 text-sm text-night-500">Clienti Felici</p>
           </div>
         ))}
       </section>
@@ -92,7 +94,7 @@ export default function AboutPage() {
         <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
           <Image
             src="/images/about-hero.jpg"
-            alt="Morocco landscape"
+            alt="Paesaggio del Marocco"
             fill
             quality={90}
             sizes="(min-width: 1024px) 50vw, 100vw"
@@ -100,17 +102,17 @@ export default function AboutPage() {
           />
         </div>
         <div>
-          <h2 className="font-display text-3xl font-semibold text-night-800">A Family Legacy of Exploration</h2>
+          <h2 className="font-display text-3xl font-semibold text-night-800">Un&rsquo;Eredità Familiare di Esplorazione</h2>
           <p className="mt-4 leading-relaxed text-night-600">
-            Welcome to Daily Desert Tours, where a deep-rooted love for our homeland meets a genuine passion for
-            sharing it with the world. As a family-owned travel agency, our journey is one of heritage, adventure,
-            and a commitment to showing you the true spirit of Morocco.
+            Benvenuto a Daily Desert Tours, dove un amore profondo per la nostra terra incontra una vera passione per
+            condividerla con il mondo. Come agenzia di viaggi a conduzione familiare, il nostro percorso è fatto di
+            eredità, avventura e l&rsquo;impegno di mostrarti il vero spirito del Marocco.
           </p>
           <p className="mt-4 leading-relaxed text-night-600">
-            The company was founded by our father, who spent his life exploring Morocco&rsquo;s hidden corners and
-            introducing others to its landscapes, history, and hospitality. His children now continue this mission,
-            having grown up as his companions learning the art of hospitality and uncovering the secrets of
-            Morocco&rsquo;s best-kept treasures.
+            L&rsquo;azienda è stata fondata da nostro padre, che ha trascorso la sua vita esplorando gli angoli
+            nascosti del Marocco e facendo conoscere agli altri i suoi paesaggi, la sua storia e la sua ospitalità. I
+            suoi figli continuano oggi questa missione, cresciuti come suoi compagni imparando l&rsquo;arte
+            dell&rsquo;ospitalità e scoprendo i segreti dei tesori meglio custoditi del Marocco.
           </p>
         </div>
       </section>
@@ -118,17 +120,17 @@ export default function AboutPage() {
       <section className="bg-sand-100 py-16">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="font-display text-3xl font-semibold text-night-800">
-            Our Mission: Immersive, Tailor-Made Journeys
+            La Nostra Missione: Viaggi Immersivi e Su Misura
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-night-600">
-            At Daily Desert Tours, we believe that travel should be more than just ticking off destinations — it
-            should be about truly connecting with a place and its people.
+            Da Daily Desert Tours crediamo che viaggiare debba essere più di una semplice lista di destinazioni da
+            spuntare — dovrebbe significare connettersi davvero con un luogo e la sua gente.
           </p>
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-        <h2 className="text-center font-display text-3xl font-semibold text-night-800">Why Travel With Us?</h2>
+        <h2 className="text-center font-display text-3xl font-semibold text-night-800">Perché Viaggiare Con Noi?</h2>
         <div className="mt-10 grid gap-6 sm:grid-cols-2">
           {values.map((value) => (
             <div key={value.title} className="flex gap-4 rounded-2xl border border-sand-200 bg-white p-6">
@@ -147,10 +149,10 @@ export default function AboutPage() {
       <section className="bg-night-800 py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
-            <h2 className="font-display text-3xl font-semibold text-white">Meet Our Team</h2>
+            <h2 className="font-display text-3xl font-semibold text-white">Conosci il Nostro Team</h2>
             <p className="mt-4 leading-relaxed text-sand-200/90">
-              We&rsquo;re a close-knit team of siblings, each of us shaped by the same father, the same desert, and the
-              same belief that a good trip is really about the people you meet along the way.
+              Siamo un team affiatato di fratelli e sorelle, ognuno cresciuto con lo stesso padre, lo stesso deserto e
+              la stessa convinzione che un buon viaggio dipenda davvero dalle persone che incontri lungo il percorso.
             </p>
           </div>
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
@@ -169,24 +171,24 @@ export default function AboutPage() {
 
       <section className="border-t border-sand-200 bg-sand-50 py-16">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <FaqSection faqs={aboutFaqs} />
+          <FaqSection faqs={aboutFaqsIt} heading="Domande Frequenti" />
         </div>
       </section>
 
       <section className="py-16">
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 px-4 text-center sm:px-6 lg:px-8">
           <h2 className="font-display text-3xl font-semibold text-night-800">
-            Join Us on Your Moroccan Adventure
+            Unisciti a Noi nella Tua Avventura Marocchina
           </h2>
-          <p className="text-night-600">Ready to explore Morocco? Reach us any time — we usually reply the same day.</p>
+          <p className="text-night-600">Pronto a esplorare il Marocco? Contattaci quando vuoi — di solito rispondiamo lo stesso giorno.</p>
           <div className="flex flex-wrap justify-center gap-3 text-sm text-night-600">
             <span>{contactInfo.address}</span>
           </div>
           <Link
-            href="/contact"
+            href="/it/contact"
             className="inline-flex items-center gap-2 rounded-full bg-terracotta-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-terracotta-700"
           >
-            Get in touch
+            Contattaci
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

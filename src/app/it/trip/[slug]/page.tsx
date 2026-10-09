@@ -3,23 +3,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Clock, MapPin, CheckCircle2, XCircle, Navigation } from "lucide-react";
-import { InquiryForm } from "./InquiryForm";
+import { InquiryFormIt } from "./InquiryFormIt";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { FaqSection } from "@/components/FaqSection";
-import { tours, getTourBySlug, getRelatedTours, getTourFaqs } from "@/data/tours";
-import { blogPosts, getRecentBlogPosts } from "@/data/blog";
+import { toursIt, getTourBySlugIt, getRelatedToursIt, getTourFaqsIt } from "@/data/tours.it";
+import { blogPostsIt, getRecentBlogPostsIt } from "@/data/blog.it";
 import { contactInfo, siteConfig } from "@/data/site";
 import { BlogCard } from "@/components/BlogCard";
 import { overlapScore } from "@/lib/related";
 import { renderRichText } from "@/lib/richText";
 
 export function generateStaticParams() {
-  return tours.map((tour) => ({ slug: tour.slug }));
+  return toursIt.map((tour) => ({ slug: tour.slug }));
 }
 
 function metaDescription(tour: { summary: string; departureCity: string; days: number; nights: number }) {
-  const prefix = `${tour.days}-day private tour from ${tour.departureCity}: `;
+  const prefix = `Tour privato di ${tour.days} giorni da ${tour.departureCity}: `;
   const budget = 155 - prefix.length;
   const body = tour.summary.length > budget ? `${tour.summary.slice(0, budget - 1).trimEnd()}…` : tour.summary;
   return `${prefix}${body}`;
@@ -31,7 +31,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const tour = getTourBySlug(slug);
+  const tour = getTourBySlugIt(slug);
   if (!tour) return {};
   const description = metaDescription(tour);
   const image = `/images/tours/${tour.slug}/hero.jpg`;
@@ -39,14 +39,14 @@ export async function generateMetadata({
     title: tour.title,
     description,
     alternates: {
-      canonical: `/trip/${tour.slug}`,
+      canonical: `/it/trip/${tour.slug}`,
       languages: { en: `/trip/${tour.slug}`, it: `/it/trip/${tour.slug}` },
     },
     openGraph: {
       type: "website",
       title: tour.title,
       description,
-      url: `${siteConfig.url}/trip/${tour.slug}`,
+      url: `${siteConfig.url}/it/trip/${tour.slug}`,
       images: [{ url: image, width: 1600, height: 900, alt: tour.title }],
     },
     twitter: {
@@ -58,19 +58,19 @@ export async function generateMetadata({
   };
 }
 
-export default async function TourDetailPage({
+export default async function ItTourDetailPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const tour = getTourBySlug(slug);
+  const tour = getTourBySlugIt(slug);
   if (!tour) notFound();
 
-  const faqs = getTourFaqs(tour);
-  const related = getRelatedTours(tour);
+  const faqs = getTourFaqsIt(tour);
+  const related = getRelatedToursIt(tour);
 
-  const scoredPosts = blogPosts
+  const scoredPosts = blogPostsIt
     .map((post) => ({
       post,
       score: overlapScore(
@@ -81,7 +81,7 @@ export default async function TourDetailPage({
     .sort((a, b) => b.score - a.score);
   const relatedPosts = (scoredPosts[0]?.score ?? 0) > 0
     ? scoredPosts.slice(0, 3).map((entry) => entry.post)
-    : getRecentBlogPosts(3);
+    : getRecentBlogPostsIt(3);
 
   const tripSchema = {
     "@context": "https://schema.org",
@@ -89,8 +89,9 @@ export default async function TourDetailPage({
     name: tour.title,
     description: tour.summary,
     image: `${siteConfig.url}/images/tours/${tour.slug}/hero.jpg`,
-    url: `${siteConfig.url}/trip/${tour.slug}`,
+    url: `${siteConfig.url}/it/trip/${tour.slug}`,
     touristType: "Private",
+    inLanguage: "it",
     provider: { "@id": `${siteConfig.url}/#organization` },
     itinerary: {
       "@type": "ItemList",
@@ -127,11 +128,11 @@ export default async function TourDetailPage({
           <div className="flex flex-wrap items-center gap-3 text-sm font-medium text-terracotta-300">
             <span className="flex items-center gap-1.5">
               <Clock className="h-4 w-4" />
-              {tour.days} Days / {tour.nights} Nights
+              {tour.days} Giorni / {tour.nights} Notti
             </span>
             <span className="flex items-center gap-1.5">
               <MapPin className="h-4 w-4" />
-              Departs from {tour.departureCity}
+              Parte da {tour.departureCity}
             </span>
           </div>
           <h1 className="mt-4 max-w-3xl font-display text-3xl font-semibold text-white sm:text-4xl lg:text-5xl">
@@ -140,17 +141,17 @@ export default async function TourDetailPage({
         </div>
       </section>
 
-      <Breadcrumbs items={[{ name: "Home", url: "/" }, { name: "Tours", url: "/trip" }, { name: tour.title, url: `/trip/${tour.slug}` }]} />
+      <Breadcrumbs items={[{ name: "Home", url: "/it" }, { name: "Tour", url: "/it/trip" }, { name: tour.title, url: `/it/trip/${tour.slug}` }]} />
 
       <section className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-3 lg:px-8">
         <div className="space-y-12 lg:col-span-2">
           <div>
-            <h2 className="font-display text-2xl font-semibold text-night-800">Overview</h2>
+            <h2 className="font-display text-2xl font-semibold text-night-800">Panoramica</h2>
             <p className="mt-3 leading-relaxed text-night-600">{renderRichText(tour.summary)}</p>
           </div>
 
           <div>
-            <h2 className="font-display text-2xl font-semibold text-night-800">Highlights</h2>
+            <h2 className="font-display text-2xl font-semibold text-night-800">Punti Salienti</h2>
             <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
               {tour.highlights.map((highlight) => (
                 <li key={highlight} className="flex items-start gap-2 text-sm text-night-700">
@@ -162,7 +163,7 @@ export default async function TourDetailPage({
           </div>
 
           <div>
-            <h2 className="font-display text-2xl font-semibold text-night-800">Day-by-Day Itinerary</h2>
+            <h2 className="font-display text-2xl font-semibold text-night-800">Itinerario Giorno per Giorno</h2>
             <ol className="mt-6 space-y-8 border-l-2 border-sand-200 pl-6">
               {tour.itinerary.map((day) => (
                 <li key={day.day} className="relative">
@@ -180,7 +181,7 @@ export default async function TourDetailPage({
             <div>
               <h2 className="flex items-center gap-2 font-display text-lg font-semibold text-night-800">
                 <CheckCircle2 className="h-5 w-5 text-terracotta-600" />
-                What&rsquo;s Included
+                Cosa è Incluso
               </h2>
               <ul className="mt-3 space-y-2 text-sm text-night-600">
                 {tour.included.map((item) => (
@@ -194,7 +195,7 @@ export default async function TourDetailPage({
             <div>
               <h2 className="flex items-center gap-2 font-display text-lg font-semibold text-night-800">
                 <XCircle className="h-5 w-5 text-night-400" />
-                What&rsquo;s Excluded
+                Cosa è Escluso
               </h2>
               <ul className="mt-3 space-y-2 text-sm text-night-600">
                 {tour.excluded.map((item) => (
@@ -211,25 +212,25 @@ export default async function TourDetailPage({
             <div className="flex items-start gap-3 rounded-2xl border border-sand-200 bg-sand-50 p-5">
               <Navigation className="mt-0.5 h-5 w-5 shrink-0 text-terracotta-600" />
               <div>
-                <p className="text-sm font-semibold text-night-800">Meeting Point</p>
+                <p className="text-sm font-semibold text-night-800">Punto d&rsquo;Incontro</p>
                 <p className="mt-1 text-sm text-night-600">{tour.meetingPoint}</p>
               </div>
             </div>
           )}
 
-          <FaqSection faqs={faqs} />
+          <FaqSection faqs={faqs} heading="Domande Frequenti" />
         </div>
 
         <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-          <InquiryForm tripName={tour.title} />
+          <InquiryFormIt tripName={tour.title} />
           <div className="rounded-2xl border border-sand-200 bg-white p-5 text-sm text-night-600">
-            <p className="font-semibold text-night-800">Prefer to talk it through?</p>
+            <p className="font-semibold text-night-800">Preferisci parlarne direttamente?</p>
             <p className="mt-1">
-              Call or WhatsApp us at{" "}
+              Chiamaci o scrivici su WhatsApp al{" "}
               <a href={contactInfo.whatsappHref} className="font-medium text-terracotta-600">
                 {contactInfo.whatsapp}
               </a>{" "}
-              or email{" "}
+              oppure invia una email a{" "}
               <a href={`mailto:${contactInfo.email}`} className="font-medium text-terracotta-600">
                 {contactInfo.email}
               </a>
@@ -244,20 +245,20 @@ export default async function TourDetailPage({
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <h2 className="font-display text-2xl font-semibold text-night-800">
-                More tours from {tour.departureCity}
+                Altri tour da {tour.departureCity}
               </h2>
               <Link
-                href={`/destinations/${tour.departureCity.toLowerCase().replace(/\s+/g, "-")}`}
+                href={`/it/destinations/${tour.departureCity.toLowerCase().replace(/\s+/g, "-")}`}
                 className="text-sm font-semibold text-terracotta-600 hover:text-terracotta-700"
               >
-                All {tour.departureCity} tours &amp; info
+                Tutti i tour e le info su {tour.departureCity}
               </Link>
             </div>
             <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((relatedTour) => (
                 <Link
                   key={relatedTour.slug}
-                  href={`/trip/${relatedTour.slug}`}
+                  href={`/it/trip/${relatedTour.slug}`}
                   className="group flex flex-col overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-sm transition-shadow hover:shadow-lg"
                 >
                   <div className="relative aspect-[4/3] w-full overflow-hidden">
@@ -271,7 +272,7 @@ export default async function TourDetailPage({
                   </div>
                   <div className="flex flex-1 flex-col p-5">
                     <span className="text-xs font-medium text-terracotta-600">
-                      {relatedTour.days} Days / {relatedTour.nights} Nights
+                      {relatedTour.days} Giorni / {relatedTour.nights} Notti
                     </span>
                     <h3 className="mt-2 font-display text-base font-semibold leading-snug text-night-800 group-hover:text-terracotta-700">
                       {relatedTour.title}
@@ -288,14 +289,14 @@ export default async function TourDetailPage({
         <section className={`py-14 ${related.length > 0 ? "border-t border-sand-200" : ""}`}>
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-wrap items-end justify-between gap-3">
-              <h2 className="font-display text-2xl font-semibold text-night-800">From the blog</h2>
-              <Link href="/blog" className="text-sm font-semibold text-terracotta-600 hover:text-terracotta-700">
-                All articles
+              <h2 className="font-display text-2xl font-semibold text-night-800">Dal blog</h2>
+              <Link href="/it/blog" className="text-sm font-semibold text-terracotta-600 hover:text-terracotta-700">
+                Tutti gli articoli
               </Link>
             </div>
             <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {relatedPosts.map((post) => (
-                <BlogCard key={post.slug} post={post} />
+                <BlogCard key={post.slug} post={post} lang="it" />
               ))}
             </div>
           </div>

@@ -1,48 +1,50 @@
 import type { Metadata } from "next";
 import { MapPin, Mail, Phone, MessageCircle, Clock, Zap, CheckCircle2 } from "lucide-react";
-import { ContactForm } from "./ContactForm";
+import { ContactFormIt } from "./ContactFormIt";
 import { FaqSection } from "@/components/FaqSection";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
-import { contactInfo, socialLinks, contactFaqs, siteConfig } from "@/data/site";
+import { contactInfo, socialLinks, siteConfig } from "@/data/site";
+import { contactFaqsIt } from "@/data/site.it";
 
 const trustPoints = [
-  { icon: Zap, label: "We usually reply the same day" },
-  { icon: MessageCircle, label: "WhatsApp is the fastest way to reach us" },
-  { icon: CheckCircle2, label: "Free, no-obligation itinerary consultation" },
+  { icon: Zap, label: "Di solito rispondiamo lo stesso giorno" },
+  { icon: MessageCircle, label: "WhatsApp è il modo più veloce per contattarci" },
+  { icon: CheckCircle2, label: "Consulenza gratuita e senza impegno sull'itinerario" },
 ];
 
 export const metadata: Metadata = {
-  title: "Contact Us",
+  title: "Contattaci",
   description:
-    "Get in touch with Daily Desert Tours — address, phone, WhatsApp, office hours, and a contact form for planning your Morocco trip.",
-  alternates: { canonical: "/contact", languages: { en: "/contact", it: "/it/contact" } },
+    "Mettiti in contatto con Daily Desert Tours — indirizzo, telefono, WhatsApp, orari d'ufficio e un modulo di contatto per pianificare il tuo viaggio in Marocco.",
+  alternates: { canonical: "/it/contact", languages: { en: "/contact", it: "/it/contact" } },
 };
 
-export default function ContactPage() {
+export default function ItContactPage() {
   return (
     <>
       <JsonLd
         data={{
           "@context": "https://schema.org",
           "@type": "ContactPage",
-          name: "Contact Daily Desert Tours",
-          url: `${siteConfig.url}/contact`,
+          name: "Contatta Daily Desert Tours",
+          url: `${siteConfig.url}/it/contact`,
           mainEntity: { "@id": `${siteConfig.url}/#organization` },
+          inLanguage: "it",
         }}
       />
 
       <section className="bg-night-800 py-16">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="font-display text-4xl font-semibold text-white sm:text-5xl">Contact Us</h1>
+          <h1 className="font-display text-4xl font-semibold text-white sm:text-5xl">Contattaci</h1>
           <p className="mt-4 text-sand-200/90">
-            Your gateway to authentic Moroccan desert adventures. We specialize in crafting unforgettable experiences
-            that take you deep into the heart of Morocco.
+            La tua porta d&rsquo;accesso ad autentiche avventure nel deserto marocchino. Siamo specializzati nel
+            creare esperienze indimenticabili che ti portano nel cuore del Marocco.
           </p>
         </div>
       </section>
 
-      <Breadcrumbs items={[{ name: "Home", url: "/" }, { name: "Contact", url: "/contact" }]} />
+      <Breadcrumbs items={[{ name: "Home", url: "/it" }, { name: "Contatti", url: "/it/contact" }]} />
 
       <section className="mx-auto max-w-6xl px-4 pt-8 sm:px-6 lg:px-8">
         <div className="grid gap-4 sm:grid-cols-3">
@@ -57,12 +59,12 @@ export default function ContactPage() {
 
       <section className="mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-5 lg:px-8">
         <div className="lg:col-span-3">
-          <ContactForm />
+          <ContactFormIt />
         </div>
 
         <div className="space-y-6 lg:col-span-2">
           <div className="rounded-2xl border border-sand-200 bg-white p-6">
-            <h2 className="font-display text-lg font-semibold text-night-800">Reach us directly</h2>
+            <h2 className="font-display text-lg font-semibold text-night-800">Contattaci direttamente</h2>
             <ul className="mt-4 space-y-4 text-sm text-night-700">
               <li className="flex items-start gap-3">
                 <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-terracotta-600" />
@@ -92,7 +94,7 @@ export default function ContactPage() {
           <div className="rounded-2xl border border-sand-200 bg-white p-6">
             <h2 className="flex items-center gap-2 font-display text-lg font-semibold text-night-800">
               <Clock className="h-5 w-5 text-terracotta-600" />
-              Office Hours
+              Orari d&rsquo;Ufficio
             </h2>
             <ul className="mt-4 space-y-2 text-sm text-night-700">
               {contactInfo.hours.map((h) => (
@@ -123,7 +125,7 @@ export default function ContactPage() {
       <section className="mx-auto max-w-6xl px-4 pb-16 sm:px-6 lg:px-8">
         <div className="overflow-hidden rounded-2xl border border-sand-200">
           <iframe
-            title="Daily Desert Tours office location"
+            title="Sede di Daily Desert Tours"
             src={contactInfo.mapEmbedSrc}
             className="h-96 w-full"
             loading="lazy"
@@ -134,7 +136,7 @@ export default function ContactPage() {
 
       <section className="border-t border-sand-200 bg-sand-50 py-16">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <FaqSection faqs={contactFaqs} />
+          <FaqSection faqs={contactFaqsIt} heading="Domande Frequenti" />
         </div>
       </section>
     </>

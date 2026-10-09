@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { TripExplorer } from "./TripExplorer";
+import { TripExplorer } from "@/components/TripExplorer";
 import { FaqSection } from "@/components/FaqSection";
 import { tours, departureCities } from "@/data/tours";
 import { tripFaqs } from "@/data/site";
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Morocco Tours & Sahara Desert Itineraries (3–12 Days)",
   description:
     "Browse every Daily Desert Tours itinerary — private 3 to 12 day Morocco and Sahara desert tours from Marrakech, Fes, Casablanca, Tangier, Ouarzazate, and Agadir, each customizable to your dates.",
-  alternates: { canonical: "/trip" },
+  alternates: { canonical: "/trip", languages: { en: "/trip", it: "/it/trip" } },
 };
 
 export default function TripListPage() {

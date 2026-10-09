@@ -3,7 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { destinations, getDestinationBySlug, getDestinationFaqs, tours } from "@/data/tours";
+import { destinationsIt, getDestinationBySlugIt, getDestinationFaqsIt, toursIt } from "@/data/tours.it";
 import { siteConfig } from "@/data/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
@@ -11,7 +11,7 @@ import { FaqSection } from "@/components/FaqSection";
 import { TourCard } from "@/components/TourCard";
 
 export function generateStaticParams() {
-  return destinations.map((destination) => ({ slug: destination.slug }));
+  return destinationsIt.map((destination) => ({ slug: destination.slug }));
 }
 
 export async function generateMetadata({
@@ -20,23 +20,23 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const destination = getDestinationBySlug(slug);
+  const destination = getDestinationBySlugIt(slug);
   if (!destination) return {};
-  const title = `${destination.city} Desert Tours | Private Morocco Itineraries from ${destination.city}`;
+  const title = `Tour nel Deserto da ${destination.city} | Itinerari Privati in Marocco`;
   const description = `${destination.tagline}. ${destination.intro}`.slice(0, 160);
   const image = `/images/tours/${destination.heroSlug}/hero.jpg`;
   return {
     title,
     description,
     alternates: {
-      canonical: `/destinations/${destination.slug}`,
+      canonical: `/it/destinations/${destination.slug}`,
       languages: { en: `/destinations/${destination.slug}`, it: `/it/destinations/${destination.slug}` },
     },
     openGraph: {
       type: "website",
       title,
       description,
-      url: `${siteConfig.url}/destinations/${destination.slug}`,
+      url: `${siteConfig.url}/it/destinations/${destination.slug}`,
       images: [{ url: image, width: 1600, height: 900, alt: destination.city }],
     },
     twitter: {
@@ -48,29 +48,30 @@ export async function generateMetadata({
   };
 }
 
-export default async function DestinationDetailPage({
+export default async function ItDestinationDetailPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const destination = getDestinationBySlug(slug);
+  const destination = getDestinationBySlugIt(slug);
   if (!destination) notFound();
 
-  const cityTours = tours.filter((tour) => tour.departureCity === destination.city);
-  const faqs = getDestinationFaqs(destination);
+  const cityTours = toursIt.filter((tour) => tour.departureCity === destination.city);
+  const faqs = getDestinationFaqsIt(destination);
 
   const destinationSchema = {
     "@context": "https://schema.org",
     "@type": "TouristDestination",
     name: destination.city,
     description: destination.intro,
-    url: `${siteConfig.url}/destinations/${destination.slug}`,
+    url: `${siteConfig.url}/it/destinations/${destination.slug}`,
     image: `${siteConfig.url}/images/tours/${destination.heroSlug}/hero.jpg`,
+    inLanguage: "it",
     includesAttraction: cityTours.map((tour) => ({
       "@type": "TouristTrip",
       name: tour.title,
-      url: `${siteConfig.url}/trip/${tour.slug}`,
+      url: `${siteConfig.url}/it/trip/${tour.slug}`,
     })),
   };
 
@@ -94,16 +95,16 @@ export default async function DestinationDetailPage({
         <div className="relative mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8">
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-terracotta-400">{destination.tagline}</p>
           <h1 className="mt-3 max-w-2xl font-display text-3xl font-semibold text-white sm:text-4xl lg:text-5xl">
-            {destination.city} Desert Tours
+            Tour nel Deserto da {destination.city}
           </h1>
         </div>
       </section>
 
       <Breadcrumbs
         items={[
-          { name: "Home", url: "/" },
-          { name: "Destinations", url: "/destinations" },
-          { name: destination.city, url: `/destinations/${destination.slug}` },
+          { name: "Home", url: "/it" },
+          { name: "Destinazioni", url: "/it/destinations" },
+          { name: destination.city, url: `/it/destinations/${destination.slug}` },
         ]}
       />
 
@@ -113,7 +114,7 @@ export default async function DestinationDetailPage({
         </div>
         {destination.highlights.length > 0 && (
           <div className="rounded-2xl border border-sand-200 bg-sand-50 p-5">
-            <p className="text-sm font-semibold text-night-800">Why start here</p>
+            <p className="text-sm font-semibold text-night-800">Perché partire da qui</p>
             <ul className="mt-3 space-y-2.5 text-sm text-night-600">
               {destination.highlights.map((highlight) => (
                 <li key={highlight} className="flex items-start gap-2">
@@ -128,32 +129,32 @@ export default async function DestinationDetailPage({
 
       <section className="mx-auto max-w-6xl px-4 pb-14 sm:px-6 lg:px-8">
         <h2 className="font-display text-2xl font-semibold text-night-800">
-          {cityTours.length} {cityTours.length === 1 ? "itinerary" : "itineraries"} from {destination.city}
+          {cityTours.length} {cityTours.length === 1 ? "itinerario" : "itinerari"} da {destination.city}
         </h2>
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {cityTours.map((tour) => (
-            <TourCard key={tour.slug} tour={tour} />
+            <TourCard key={tour.slug} tour={tour} lang="it" />
           ))}
         </div>
       </section>
 
       <section className="border-t border-sand-200 bg-sand-50 py-14">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <FaqSection faqs={faqs} />
+          <FaqSection faqs={faqs} heading="Domande Frequenti" />
         </div>
       </section>
 
       <section className="bg-terracotta-600 py-14">
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 px-4 text-center sm:px-6 lg:px-8">
           <h2 className="font-display text-2xl font-semibold text-white sm:text-3xl">
-            Not seeing the right fit from {destination.city}?
+            Non trovi quello che cerchi da {destination.city}?
           </h2>
-          <p className="text-sm text-white/90">Tell us your dates and interests — we&rsquo;ll build a private route around them.</p>
+          <p className="text-sm text-white/90">Dicci le tue date e i tuoi interessi — costruiremo un percorso privato intorno a te.</p>
           <Link
-            href="/contact"
+            href="/it/contact"
             className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-terracotta-700 shadow-lg transition-transform hover:scale-105"
           >
-            Get in touch
+            Contattaci
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

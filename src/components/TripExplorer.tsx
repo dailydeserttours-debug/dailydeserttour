@@ -4,17 +4,22 @@ import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { TourCard } from "@/components/TourCard";
 import type { TourSummary } from "@/data/tours";
+import { uiText, type Locale } from "@/data/i18n";
 
-const durationBuckets = [
-  { label: "All durations", test: () => true },
-  { label: "3–4 Days", test: (d: number) => d <= 4 },
-  { label: "5–7 Days", test: (d: number) => d >= 5 && d <= 7 },
-  { label: "8+ Days", test: (d: number) => d >= 8 },
-];
+const durationTests = [() => true, (d: number) => d <= 4, (d: number) => d >= 5 && d <= 7, (d: number) => d >= 8];
 
-export function TripExplorer({ tours, cities }: { tours: TourSummary[]; cities: string[] }) {
+export function TripExplorer({
+  tours,
+  cities,
+  lang = "en",
+}: {
+  tours: TourSummary[];
+  cities: string[];
+  lang?: Locale;
+}) {
+  const t = uiText[lang].tripExplorer;
   const [query, setQuery] = useState("");
-  const [city, setCity] = useState("All cities");
+  const [city, setCity] = useState<string>(t.allCities);
   const [durationIndex, setDurationIndex] = useState(0);
 
   const filtered = useMemo(() => {
@@ -22,22 +27,22 @@ export function TripExplorer({ tours, cities }: { tours: TourSummary[]; cities: 
     return tours.filter((tour) => {
       const matchesQuery =
         !q || tour.title.toLowerCase().includes(q) || tour.summary.toLowerCase().includes(q);
-      const matchesCity = city === "All cities" || tour.departureCity === city;
-      const matchesDuration = durationBuckets[durationIndex].test(tour.days);
+      const matchesCity = city === t.allCities || tour.departureCity === city;
+      const matchesDuration = durationTests[durationIndex](tour.days);
       return matchesQuery && matchesCity && matchesDuration;
     });
-  }, [tours, query, city, durationIndex]);
+  }, [tours, query, city, durationIndex, t.allCities]);
 
   return (
     <div>
-      <h2 className="sr-only">Browse and filter all tours</h2>
+      <h2 className="sr-only">{t.browseAndFilter}</h2>
       <div className="flex flex-col gap-3 rounded-2xl border border-sand-200 bg-white p-4 sm:flex-row sm:items-center">
         <div className="relative flex-1">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-night-400" />
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search tours (e.g. Merzouga, Fes, desert...)"
+            placeholder={t.searchPlaceholder}
             className="w-full rounded-lg border border-sand-300 bg-sand-50 py-2.5 pl-10 pr-3 text-sm text-night-800 placeholder:text-night-400 focus:border-terracotta-500 focus:outline-none focus:ring-2 focus:ring-terracotta-500/20"
           />
         </div>
@@ -46,7 +51,7 @@ export function TripExplorer({ tours, cities }: { tours: TourSummary[]; cities: 
           onChange={(e) => setCity(e.target.value)}
           className="rounded-lg border border-sand-300 bg-sand-50 px-3 py-2.5 text-sm text-night-800 focus:border-terracotta-500 focus:outline-none focus:ring-2 focus:ring-terracotta-500/20"
         >
-          <option>All cities</option>
+          <option>{t.allCities}</option>
           {cities.map((c) => (
             <option key={c}>{c}</option>
           ))}
@@ -56,27 +61,25 @@ export function TripExplorer({ tours, cities }: { tours: TourSummary[]; cities: 
           onChange={(e) => setDurationIndex(Number(e.target.value))}
           className="rounded-lg border border-sand-300 bg-sand-50 px-3 py-2.5 text-sm text-night-800 focus:border-terracotta-500 focus:outline-none focus:ring-2 focus:ring-terracotta-500/20"
         >
-          {durationBuckets.map((bucket, i) => (
-            <option key={bucket.label} value={i}>
-              {bucket.label}
+          {t.durations.map((label, i) => (
+            <option key={label} value={i}>
+              {label}
             </option>
           ))}
         </select>
       </div>
 
-      <p className="mt-4 text-sm text-night-500">
-        {filtered.length} {filtered.length === 1 ? "tour" : "tours"} found
-      </p>
+      <p className="mt-4 text-sm text-night-500">{t.resultsFound(filtered.length)}</p>
 
       {filtered.length > 0 ? (
         <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((tour) => (
-            <TourCard key={tour.slug} tour={tour} />
+            <TourCard key={tour.slug} tour={tour} lang={lang} />
           ))}
         </div>
       ) : (
         <div className="mt-10 rounded-2xl border border-dashed border-sand-300 p-10 text-center text-night-500">
-          No tours match your filters — try widening your search.
+          {t.noResults}
         </div>
       )}
     </div>

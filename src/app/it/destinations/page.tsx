@@ -1,39 +1,39 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { destinations } from "@/data/tours";
-import { destinationsFaqs } from "@/data/site";
+import { destinationsIt } from "@/data/tours.it";
+import { destinationsFaqsIt } from "@/data/site.it";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { FaqSection } from "@/components/FaqSection";
 
 export const metadata: Metadata = {
-  title: "Morocco Tour Departure Cities & Destinations",
+  title: "Città di Partenza e Destinazioni dei Tour in Marocco",
   description:
-    "Every city Daily Desert Tours departs from — Marrakech, Fes, Casablanca, Tangier, Ouarzazate, Agadir, and Errachidia — with the private itineraries available from each.",
-  alternates: { canonical: "/destinations", languages: { en: "/destinations", it: "/it/destinations" } },
+    "Ogni città da cui parte Daily Desert Tours — Marrakech, Fes, Casablanca, Tangeri, Ouarzazate, Agadir ed Errachidia — con gli itinerari privati disponibili da ciascuna.",
+  alternates: { canonical: "/it/destinations", languages: { en: "/destinations", it: "/it/destinations" } },
 };
 
-export default function DestinationsIndexPage() {
+export default function ItDestinationsIndexPage() {
   return (
     <>
       <section className="bg-night-800 py-16">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="font-display text-4xl font-semibold text-white sm:text-5xl">Where We Go</h1>
+          <h1 className="font-display text-4xl font-semibold text-white sm:text-5xl">Dove Andiamo</h1>
           <p className="mt-4 text-sand-200/90">
-            Every private itinerary on this site departs from one of these cities. Pick the one closest to where
-            you land, or ask us to route between two of them.
+            Ogni itinerario privato su questo sito parte da una di queste città. Scegli quella più vicina a dove
+            atterri, oppure chiedici di organizzare un percorso tra due di esse.
           </p>
         </div>
       </section>
 
-      <Breadcrumbs items={[{ name: "Home", url: "/" }, { name: "Destinations", url: "/destinations" }]} />
+      <Breadcrumbs items={[{ name: "Home", url: "/it" }, { name: "Destinazioni", url: "/it/destinations" }]} />
 
       <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {destinations.map((destination) => (
+          {destinationsIt.map((destination) => (
             <Link
               key={destination.slug}
-              href={`/destinations/${destination.slug}`}
+              href={`/it/destinations/${destination.slug}`}
               className="group flex flex-col overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-sm transition-shadow hover:shadow-lg"
             >
               <div className="relative aspect-[4/3] w-full overflow-hidden">
@@ -51,7 +51,7 @@ export default function DestinationsIndexPage() {
                 </h2>
                 <p className="mt-1 text-xs font-medium text-terracotta-600">{destination.tagline}</p>
                 <p className="mt-2 text-sm text-night-500">
-                  {destination.tourCount} {destination.tourCount === 1 ? "itinerary" : "itineraries"}
+                  {destination.tourCount} {destination.tourCount === 1 ? "itinerario" : "itinerari"}
                 </p>
               </div>
             </Link>
@@ -61,7 +61,7 @@ export default function DestinationsIndexPage() {
 
       <section className="border-t border-sand-200 bg-sand-50 py-16">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <FaqSection faqs={destinationsFaqs} />
+          <FaqSection faqs={destinationsFaqsIt} heading="Domande Frequenti" />
         </div>
       </section>
     </>

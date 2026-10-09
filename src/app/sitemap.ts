@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { tours, destinations } from "@/data/tours";
 import { blogPosts } from "@/data/blog";
+import { blogPostsIt } from "@/data/blog.it";
 import { siteConfig } from "@/data/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -14,32 +15,99 @@ export default function sitemap(): MetadataRoute.Sitemap {
   };
   // /privacy and /terms are intentionally excluded — they're noindexed placeholder
   // pages (see their metadata) and don't belong in the sitemap until real copy lands.
-  const staticRoutes = ["", "/about", "/contact", "/trip", "/destinations", "/blog"].map((path) => ({
-    url: `${siteConfig.url}${path}`,
-    changeFrequency: (path === "" || path === "/trip" ? "weekly" : "monthly") as "weekly" | "monthly",
-    priority: priorities[path] ?? 0.3,
-  }));
+  // No Italian equivalent either, for the same reason.
+  const staticPaths = ["", "/about", "/contact", "/trip", "/destinations", "/blog"];
+  const staticRoutes = staticPaths.flatMap((path) => [
+    {
+      url: `${siteConfig.url}${path}`,
+      changeFrequency: (path === "" || path === "/trip" ? "weekly" : "monthly") as "weekly" | "monthly",
+      priority: priorities[path] ?? 0.3,
+      alternates: { languages: { en: `${siteConfig.url}${path}`, it: `${siteConfig.url}/it${path}` } },
+    },
+    {
+      url: `${siteConfig.url}/it${path}`,
+      changeFrequency: (path === "" || path === "/trip" ? "weekly" : "monthly") as "weekly" | "monthly",
+      priority: priorities[path] ?? 0.3,
+      alternates: { languages: { en: `${siteConfig.url}${path}`, it: `${siteConfig.url}/it${path}` } },
+    },
+  ]);
 
   // No per-tour/per-destination "last updated" timestamp exists in the data — omitting
   // lastModified (rather than stamping every URL with the build time) keeps the signal honest.
-  const tourRoutes = tours.map((tour) => ({
-    url: `${siteConfig.url}/trip/${tour.slug}`,
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }));
+  const tourRoutes = tours.flatMap((tour) => [
+    {
+      url: `${siteConfig.url}/trip/${tour.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+      alternates: {
+        languages: { en: `${siteConfig.url}/trip/${tour.slug}`, it: `${siteConfig.url}/it/trip/${tour.slug}` },
+      },
+    },
+    {
+      url: `${siteConfig.url}/it/trip/${tour.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+      alternates: {
+        languages: { en: `${siteConfig.url}/trip/${tour.slug}`, it: `${siteConfig.url}/it/trip/${tour.slug}` },
+      },
+    },
+  ]);
 
-  const destinationRoutes = destinations.map((destination) => ({
-    url: `${siteConfig.url}/destinations/${destination.slug}`,
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
+  const destinationRoutes = destinations.flatMap((destination) => [
+    {
+      url: `${siteConfig.url}/destinations/${destination.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+      alternates: {
+        languages: {
+          en: `${siteConfig.url}/destinations/${destination.slug}`,
+          it: `${siteConfig.url}/it/destinations/${destination.slug}`,
+        },
+      },
+    },
+    {
+      url: `${siteConfig.url}/it/destinations/${destination.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+      alternates: {
+        languages: {
+          en: `${siteConfig.url}/destinations/${destination.slug}`,
+          it: `${siteConfig.url}/it/destinations/${destination.slug}`,
+        },
+      },
+    },
+  ]);
 
-  const blogRoutes = blogPosts.map((post) => ({
-    url: `${siteConfig.url}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: "yearly" as const,
-    priority: 0.5,
-  }));
+  const blogRoutes = blogPosts.flatMap((post) => {
+    const postIt = blogPostsIt.find((p) => p.slug === post.slug);
+    return [
+      {
+        url: `${siteConfig.url}/blog/${post.slug}`,
+        lastModified: new Date(post.date),
+        changeFrequency: "yearly" as const,
+        priority: 0.5,
+        alternates: {
+          languages: { en: `${siteConfig.url}/blog/${post.slug}`, it: `${siteConfig.url}/it/blog/${post.slug}` },
+        },
+      },
+      ...(postIt
+        ? [
+            {
+              url: `${siteConfig.url}/it/blog/${post.slug}`,
+              lastModified: new Date(postIt.date),
+              changeFrequency: "yearly" as const,
+              priority: 0.5,
+              alternates: {
+                languages: {
+                  en: `${siteConfig.url}/blog/${post.slug}`,
+                  it: `${siteConfig.url}/it/blog/${post.slug}`,
+                },
+              },
+            },
+          ]
+        : []),
+    ];
+  });
 
   return [...staticRoutes, ...tourRoutes, ...destinationRoutes, ...blogRoutes];
 }

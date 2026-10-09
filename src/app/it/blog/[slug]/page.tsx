@@ -3,8 +3,8 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { blogPosts, getBlogPostBySlug, getRelatedBlogPosts } from "@/data/blog";
-import { tours, getFeaturedTours } from "@/data/tours";
+import { blogPostsIt, getBlogPostBySlugIt, getRelatedBlogPostsIt } from "@/data/blog.it";
+import { toursIt, getFeaturedToursIt } from "@/data/tours.it";
 import { siteConfig } from "@/data/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
@@ -15,7 +15,7 @@ import { renderRichText } from "@/lib/richText";
 import { overlapScore } from "@/lib/related";
 
 export function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
+  return blogPostsIt.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({
@@ -24,21 +24,21 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = getBlogPostBySlugIt(slug);
   if (!post) return {};
   const image = post.image;
   return {
     title: post.title,
     description: post.excerpt,
     alternates: {
-      canonical: `/blog/${post.slug}`,
+      canonical: `/it/blog/${post.slug}`,
       languages: { en: `/blog/${post.slug}`, it: `/it/blog/${post.slug}` },
     },
     openGraph: {
       type: "article",
       title: post.title,
       description: post.excerpt,
-      url: `${siteConfig.url}/blog/${post.slug}`,
+      url: `${siteConfig.url}/it/blog/${post.slug}`,
       publishedTime: post.date,
       images: [{ url: image, width: 1200, height: 800, alt: post.title }],
     },
@@ -51,18 +51,18 @@ export async function generateMetadata({
   };
 }
 
-export default async function BlogPostPage({
+export default async function ItBlogPostPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = getBlogPostBySlugIt(slug);
   if (!post) notFound();
 
-  const relatedPosts = getRelatedBlogPosts(post);
+  const relatedPosts = getRelatedBlogPostsIt(post);
 
-  const scoredTours = tours
+  const scoredTours = toursIt
     .map((tour) => ({
       tour,
       score: overlapScore(
@@ -73,7 +73,7 @@ export default async function BlogPostPage({
     .sort((a, b) => b.score - a.score);
   const relatedTours = (scoredTours[0]?.score ?? 0) > 0
     ? scoredTours.slice(0, 3).map((entry) => entry.tour)
-    : getFeaturedTours(3);
+    : getFeaturedToursIt(3);
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -83,30 +83,31 @@ export default async function BlogPostPage({
     datePublished: post.date,
     dateModified: post.updated ?? post.date,
     image: `${siteConfig.url}${post.image}`,
-    url: `${siteConfig.url}/blog/${post.slug}`,
+    url: `${siteConfig.url}/it/blog/${post.slug}`,
+    inLanguage: "it",
     author: { "@id": `${siteConfig.url}/#organization` },
     publisher: { "@id": `${siteConfig.url}/#organization` },
-    mainEntityOfPage: `${siteConfig.url}/blog/${post.slug}`,
+    mainEntityOfPage: `${siteConfig.url}/it/blog/${post.slug}`,
   };
 
   return (
     <>
       <JsonLd data={articleSchema} />
-      <Breadcrumbs items={[{ name: "Home", url: "/" }, { name: "Blog", url: "/blog" }, { name: post.title, url: `/blog/${post.slug}` }]} />
+      <Breadcrumbs items={[{ name: "Home", url: "/it" }, { name: "Blog", url: "/it/blog" }, { name: post.title, url: `/it/blog/${post.slug}` }]} />
 
       <article className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
-        <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm font-semibold text-terracotta-600 hover:text-terracotta-700">
+        <Link href="/it/blog" className="inline-flex items-center gap-1.5 text-sm font-semibold text-terracotta-600 hover:text-terracotta-700">
           <ArrowLeft className="h-4 w-4" />
-          Back to blog
+          Torna al blog
         </Link>
 
         <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-medium uppercase tracking-wide text-terracotta-600">
           <time dateTime={post.date}>
-            {new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+            {new Date(post.date).toLocaleDateString("it-IT", { year: "numeric", month: "long", day: "numeric" })}
           </time>
           {post.updated && (
             <time dateTime={post.updated} className="text-night-400">
-              Updated {new Date(post.updated).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+              Aggiornato il {new Date(post.updated).toLocaleDateString("it-IT", { year: "numeric", month: "long", day: "numeric" })}
             </time>
           )}
         </div>
@@ -132,17 +133,17 @@ export default async function BlogPostPage({
         </div>
 
         <div className="mt-12 border-t border-sand-200 pt-10">
-          <FaqSection faqs={post.faqs} />
+          <FaqSection faqs={post.faqs} heading="Domande Frequenti" />
         </div>
       </article>
 
       {relatedPosts.length > 0 && (
         <section className="border-t border-sand-200 bg-sand-50 py-14">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <h2 className="font-display text-2xl font-semibold text-night-800">You might also like</h2>
+            <h2 className="font-display text-2xl font-semibold text-night-800">Potrebbe interessarti anche</h2>
             <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {relatedPosts.map((relatedPost) => (
-                <BlogCard key={relatedPost.slug} post={relatedPost} />
+                <BlogCard key={relatedPost.slug} post={relatedPost} lang="it" />
               ))}
             </div>
           </div>
@@ -153,14 +154,14 @@ export default async function BlogPostPage({
         <section className="py-14">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-wrap items-end justify-between gap-3">
-              <h2 className="font-display text-2xl font-semibold text-night-800">Tours to plan around this story</h2>
-              <Link href="/trip" className="text-sm font-semibold text-terracotta-600 hover:text-terracotta-700">
-                Browse all tours
+              <h2 className="font-display text-2xl font-semibold text-night-800">Tour da pianificare intorno a questa storia</h2>
+              <Link href="/it/trip" className="text-sm font-semibold text-terracotta-600 hover:text-terracotta-700">
+                Sfoglia tutti i tour
               </Link>
             </div>
             <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {relatedTours.map((tour) => (
-                <TourCard key={tour.slug} tour={tour} />
+                <TourCard key={tour.slug} tour={tour} lang="it" />
               ))}
             </div>
           </div>
