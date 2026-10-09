@@ -317,13 +317,13 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "What Makes Fes Worth Visiting?",
         body: [
-          "Fes el Bali, the old medina, is widely considered one of the best-preserved medieval cities in the Arab world, and it's largely closed to cars, so exploring it means walking narrow lanes past tanneries, metalworkers, and weavers still practicing centuries-old trades. Landmarks like the Al-Qarawiyyin, often cited as one of the oldest continuously operating universities in the world, and the Chouara Tannery's dye pits give the city a sense of continuity that's hard to find elsewhere. It rewards travelers who want texture and history over polish, and who don't mind a slower, more disorienting pace of discovery than a well-signposted city offers — getting a little lost is normal, not a sign you've gone wrong.",
+          "[Fes](/destinations/fes) el Bali, the old medina, is widely considered one of the best-preserved medieval cities in the Arab world, and it's largely closed to cars, so exploring it means walking narrow lanes past tanneries, metalworkers, and weavers still practicing centuries-old trades. Landmarks like the Al-Qarawiyyin, often cited as one of the oldest continuously operating universities in the world, and the Chouara Tannery's dye pits give the city a sense of continuity that's hard to find elsewhere. It rewards travelers who want texture and history over polish, and who don't mind a slower, more disorienting pace of discovery than a well-signposted city offers — getting a little lost is normal, not a sign you've gone wrong.",
         ],
       },
       {
         heading: "What Makes Marrakech Worth Visiting?",
         body: [
-          "Marrakech is louder, warmer in feel, and easier to settle into on a first trip. Jemaa el-Fna, the Majorelle Garden, and a wider range of riads and restaurants make it a more forgiving base for travelers who want good food and comfortable accommodation without much hunting. It's also a faster gateway to the Atlas Mountains and the Sahara than Fes, since the Tizi n'Tichka pass and the southern desert routes both start closer to Marrakech — a real advantage if the desert is the main draw of your trip rather than a side excursion. Direct international flights are more plentiful here too, which is part of why it's the more common first stop for visitors.",
+          "[Marrakech](/destinations/marrakech) is louder, warmer in feel, and easier to settle into on a first trip. Jemaa el-Fna, the Majorelle Garden, and a wider range of riads and restaurants make it a more forgiving base for travelers who want good food and comfortable accommodation without much hunting. It's also a faster gateway to the Atlas Mountains and the Sahara than Fes, since the Tizi n'Tichka pass and the southern desert routes both start closer to Marrakech — a real advantage if the desert is the main draw of your trip rather than a side excursion. Direct international flights are more plentiful here too, which is part of why it's the more common first stop for visitors.",
         ],
       },
       {
@@ -567,7 +567,7 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "Where Is Chefchaouen and Why Is It Off the Main Route?",
         body: [
-          "Chefchaouen sits in the Rif Mountains in northern Morocco, roughly two hours from Tangier and closer to four from Fes, far enough from the classic Marrakech–Fes–Sahara loop that it usually requires a deliberate detour rather than a stopover on the way to somewhere else. That distance is part of the appeal — it's exactly why the town still feels calmer than Morocco's more visited medinas, without the volume of day-trippers Fes or Marrakech absorb. The mountain setting also means noticeably cooler air than the plains below, which is part of why it developed as a retreat in the first place.",
+          "Chefchaouen sits in the Rif Mountains in northern Morocco, roughly two hours from [Tangier](/destinations/tangier) and closer to four from Fes, far enough from the classic Marrakech–Fes–Sahara loop that it usually requires a deliberate detour rather than a stopover on the way to somewhere else. That distance is part of the appeal — it's exactly why the town still feels calmer than Morocco's more visited medinas, without the volume of day-trippers Fes or Marrakech absorb. The mountain setting also means noticeably cooler air than the plains below, which is part of why it developed as a retreat in the first place.",
         ],
       },
       {
@@ -585,7 +585,7 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "How Do You Fit Chefchaouen Into a Morocco Itinerary?",
         body: [
-          "It pairs naturally with Tangier or a northern Morocco route rather than a desert-focused trip, given how far it sits from Merzouga and the southern kasbah routes — combining Chefchaouen with the Sahara in one trip usually means a longer, more ambitious itinerary that treats the north and south as two separate legs. If you're building an itinerary that includes the north, it's worth asking us to route a day or two through the Rif specifically for this stop rather than trying to combine it with a Sahara-focused loop that doesn't have the days to spare. Travelers arriving by ferry from Spain in particular often start here before heading south, since it sits close to that entry point already.",
+          "It pairs naturally with Tangier or a northern Morocco route rather than a desert-focused trip, given how far it sits from Merzouga and the southern kasbah routes — combining Chefchaouen with the Sahara in one trip usually means a longer, more ambitious itinerary that treats the north and south as two separate legs. Our [6-Day Morocco Desert Tour from Tangier](/trip/6-days-tour-from-tangier) routes through Chefchaouen on the way south, so it doesn't have to be a separate trip. Travelers arriving by ferry from Spain in particular often start here before heading south, since it sits close to that entry point already.",
         ],
       },
     ],
@@ -677,19 +677,19 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "How Much Water and Sun Protection Do You Actually Need?",
         body: [
-          "More than feels necessary, and on a schedule rather than reactively. Drink water steadily through the day rather than only when you feel thirsty, and add an electrolyte supplement if you're out during the hottest hours, since plain water alone doesn't replace the salts lost through sweat during a full day outdoors. Direct sun exposure adds up fast, so sunscreen reapplied every couple of hours, a hat, and sunglasses are worth treating as non-negotiable rather than optional extras — sand reflects sunlight back upward as well, which means exposed skin gets hit from two directions at once, not just from overhead.",
+          "More than feels necessary, and on a schedule rather than reactively. Drink water steadily through the day rather than only when you feel thirsty, and add an electrolyte supplement if you're out during the hottest hours, since plain water alone doesn't replace the salts lost through sweat during a full day outdoors. Direct sun exposure adds up fast, so sunscreen reapplied every couple of hours, a hat, and sunglasses are worth treating as non-negotiable rather than optional extras — sand reflects sunlight back upward as well, which means exposed skin gets hit from two directions at once, not just from overhead. The [CDC's guidance on extreme heat](https://www.cdc.gov/extreme-heat/prevention/index.html) covers the same hydration and sun-exposure basics and is a good general reference if you want more detail beyond desert-specific tips.",
         ],
       },
       {
         heading: "How Should You Time Activities Around the Heat?",
         body: [
-          "Schedule anything active for early morning or the last hours before sunset, and treat midday as rest time rather than pushing through it. Most desert itineraries already build this in — camel treks and dune walks are timed to avoid the punishing midday sun, which is also when the light is best for photos anyway, so the safety-driven schedule and the best-looking schedule end up being the same one. If you're prone to heat sensitivity, ask your driver-guide about adjusting the day's pace further, including starting drives earlier to avoid being on the road during the hottest stretch. Midday itself is a good window to catch up on rest inside a shaded vehicle or riad rather than treating it as wasted time.",
+          "Schedule anything active for early morning or the last hours before sunset, and treat midday as rest time rather than pushing through it. Most desert itineraries already build this in — camel treks and dune walks are timed to avoid the punishing midday sun, which is also when the light is best for photos anyway, so the safety-driven schedule and the best-looking schedule end up being the same one. If you're prone to heat sensitivity, ask your driver-guide about adjusting the day's pace further, including starting drives earlier to avoid being on the road during the hottest stretch. Midday itself is a good window to catch up on rest inside a shaded vehicle or riad rather than treating it as wasted time. Every [multi-day desert tour](/trip) we run already builds this pacing into the itinerary rather than leaving it to chance.",
         ],
       },
       {
         heading: "Are Cold Desert Nights a Safety Concern Too?",
         body: [
-          "Yes — temperatures can drop sharply after sunset, which is the opposite risk from the daytime heat and just as easy to underestimate, especially for travelers who packed heavily for the heat and assumed the desert would stay warm all night. Treat warm layers as part of your safety kit, not just comfort, since a poorly prepared cold night can undo the benefit of having managed the daytime heat well. This swing is most dramatic in winter, when a warm afternoon can give way to a night close to freezing once the sun is fully down. If you're managing a health condition that heat, cold, or altitude changes could affect, mention it when you book so your itinerary and camp choice can be adjusted accordingly.",
+          "Yes — temperatures can drop sharply after sunset, which is the opposite risk from the daytime heat and just as easy to underestimate, especially for travelers who packed heavily for the heat and assumed the desert would stay warm all night. Treat warm layers as part of your safety kit, not just comfort, since a poorly prepared cold night can undo the benefit of having managed the daytime heat well. This swing is most dramatic in winter, when a warm afternoon can give way to a night close to freezing once the sun is fully down — see our [guide to a first night in a desert camp](/blog/sahara-desert-camp-first-night-in-merzouga) for what that temperature drop actually feels like after dark. If you're managing a health condition that heat, cold, or altitude changes could affect, mention it when you book so your itinerary and camp choice can be adjusted accordingly.",
         ],
       },
     ],
@@ -940,7 +940,7 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "Is There More to Ouarzazate Than the Film Studios?",
         body: [
-          "Yes — the town itself sits at a natural crossroads between Marrakech, the Dades and Todra valleys, and the road toward the Sahara, with the Taourirt Kasbah in town itself worth a short visit alongside the studios. That's why it shows up as a stop or overnight on most of our [southern Morocco routes](/trip) rather than a destination on its own, including the Ouarzazate detour built into our [6-Day Tour from Agadir](/trip/6-days-desert-tour-from-agadir), where it sits naturally on the way toward the desert. A growing solar power complex just outside town is also visible from the road, a modern contrast to the historic kasbahs nearby.",
+          "Yes — the town itself sits at a natural crossroads between Marrakech, the Dades and Todra valleys, and the road toward the Sahara, with the Taourirt Kasbah in town itself worth a short visit alongside the studios. That's why it shows up as a stop or overnight on most of our [southern Morocco routes](/trip) rather than a destination on its own, including the Ouarzazate detour built into our [6-Day Tour from Agadir](/trip/6-days-desert-tour-from-agadir), where it sits naturally on the way toward the desert — see our [Ouarzazate destination page](/destinations/ouarzazate) for the full list of tours that pass through. A growing solar power complex just outside town is also visible from the road, a modern contrast to the historic kasbahs nearby.",
         ],
       },
     ],
@@ -972,7 +972,7 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "Is Tipping Expected in Morocco?",
         body: [
-          "Yes, in a modest way — Morocco doesn't run on the tipping expectations of the United States, but a small tip for good service is genuinely appreciated and makes a real difference to people earning modest wages, since many service jobs pay close to minimum wage. Always tip in Moroccan dirhams (MAD) rather than euros or dollars — dirhams are accepted everywhere and more useful to the person receiving them, even though euros are sometimes taken in touristy spots at an unfavorable exchange rate. Withdrawing cash at an ATM after arrival, or exchanging a small amount at the airport, is worth doing early so you're not caught without small bills for tipping.",
+          "Yes, in a modest way — Morocco doesn't run on the tipping expectations of the United States, but a small tip for good service is genuinely appreciated and makes a real difference to people earning modest wages, since many service jobs pay close to minimum wage. Always tip in [Moroccan dirhams (MAD)](https://www.visitmorocco.com) rather than euros or dollars — dirhams are accepted everywhere and more useful to the person receiving them, even though euros are sometimes taken in touristy spots at an unfavorable exchange rate. Withdrawing cash at an ATM after arrival, or exchanging a small amount at the airport, is worth doing early so you're not caught without small bills for tipping.",
         ],
       },
       {
@@ -984,7 +984,7 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "How Much Should You Tip a Driver-Guide on a Multi-Day Tour?",
         body: [
-          "A commonly used guideline is roughly 200–300 MAD per day of the tour, tipped directly at the end of the trip rather than daily along the way. This is a norm rather than a rule, and it's entirely at your discretion based on the experience — for a multi-day private tour, tipping your driver-guide this way is customary but not obligatory. If your itinerary involves a separate desert camp crew in addition to your main driver-guide, a smaller additional tip for the camp staff is also appreciated, since they're typically a different team from the one driving you between cities.",
+          "A commonly used guideline is roughly 200–300 MAD per day of the tour, tipped directly at the end of the trip rather than daily along the way. This is a norm rather than a rule, and it's entirely at your discretion based on the experience — for a multi-day private tour, tipping your driver-guide this way is customary but not obligatory. If your itinerary involves a separate desert camp crew in addition to your main driver-guide, a smaller additional tip for the camp staff is also appreciated, since they're typically a different team from the one driving you between cities. See our [private tour guide](/blog/private-tour-vs-group-tour-morocco) for more on what a driver-guide actually does over a multi-day trip.",
         ],
       },
       {
@@ -1038,7 +1038,7 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "What Else Should You Check Before Booking Your Trip?",
         body: [
-          "Regardless of your nationality, your passport should be valid for at least six months beyond your departure date from Morocco, with at least one blank page for entry stamps — border officials can deny boarding or entry over passport validity alone, independent of visa status. It's also worth having proof of onward travel and, in some cases, accommodation details ready, since these are occasionally requested even for visa-free entry. Because requirements shift and vary so much by country, the reliable move is to check your nearest Moroccan embassy or consulate's official guidance a few months before you travel — and if anything is unclear, ask us when you inquire and we'll point you toward the right resource for your nationality.",
+          "Regardless of your nationality, your passport should be valid for at least six months beyond your departure date from Morocco, with at least one blank page for entry stamps — border officials can deny boarding or entry over passport validity alone, independent of visa status. It's also worth having proof of onward travel and, in some cases, accommodation details ready, since these are occasionally requested even for visa-free entry. Because requirements shift and vary so much by country, the reliable move is to check your nearest Moroccan embassy or consulate's official guidance, or the [official Morocco tourism portal](https://www.visitmorocco.com), a few months before you travel — and if anything is unclear, [ask us when you inquire](/contact) and we'll point you toward the right resource for your nationality.",
         ],
       },
     ],

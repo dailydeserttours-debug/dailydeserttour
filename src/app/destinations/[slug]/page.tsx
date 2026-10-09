@@ -91,7 +91,7 @@ export default async function DestinationDetailPage({
         <div className="relative mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8">
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-terracotta-400">{destination.tagline}</p>
           <h1 className="mt-3 max-w-2xl font-display text-3xl font-semibold text-white sm:text-4xl lg:text-5xl">
-            Tours from {destination.city}
+            {destination.city} Desert Tours
           </h1>
         </div>
       </section>

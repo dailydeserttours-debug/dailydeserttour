@@ -12,6 +12,7 @@ import { blogPosts, getRecentBlogPosts } from "@/data/blog";
 import { contactInfo, siteConfig } from "@/data/site";
 import { BlogCard } from "@/components/BlogCard";
 import { overlapScore } from "@/lib/related";
+import { renderRichText } from "@/lib/richText";
 
 export function generateStaticParams() {
   return tours.map((tour) => ({ slug: tour.slug }));
@@ -142,7 +143,7 @@ export default async function TourDetailPage({
         <div className="space-y-12 lg:col-span-2">
           <div>
             <h2 className="font-display text-2xl font-semibold text-night-800">Overview</h2>
-            <p className="mt-3 leading-relaxed text-night-600">{tour.summary}</p>
+            <p className="mt-3 leading-relaxed text-night-600">{renderRichText(tour.summary)}</p>
           </div>
 
           <div>
@@ -166,7 +167,7 @@ export default async function TourDetailPage({
                     {day.day}
                   </span>
                   <h3 className="font-display text-lg font-semibold text-night-800">{day.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-night-600">{day.description}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-night-600">{renderRichText(day.description)}</p>
                 </li>
               ))}
             </ol>

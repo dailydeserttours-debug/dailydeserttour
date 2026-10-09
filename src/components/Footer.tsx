@@ -11,7 +11,7 @@ const socialIcons: Record<string, typeof FacebookIcon> = {
   Pinterest: PinterestIcon,
 };
 
-const topDestinations = destinations.slice(0, 5);
+const topDestinations = destinations;
 const featuredTours = getFeaturedTours(4);
 
 export function Footer() {
@@ -126,7 +126,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-sand-200/90">
-            <a href={contactInfo.whatsappHref} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-white">
+            <a href={contactInfo.whatsappHref} target="_blank" rel="noreferrer noopener" className="flex items-center gap-2 hover:text-white">
               <MessageCircle className="h-4 w-4 text-terracotta-400" />
               {contactInfo.whatsapp}
             </a>
